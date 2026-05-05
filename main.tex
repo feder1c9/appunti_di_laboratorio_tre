@@ -54,6 +54,40 @@
 
 \usepackage{float} %per H nelle tabelle
 
+% Pacchetto per personalizzare gli elenchi
+\usepackage{enumitem}
+
+% Bibliografia
+\usepackage[
+backend=biber,
+style=numeric,
+sorting=ynt
+]{biblatex}
+\addbibresource{bibliografia.bib}
+\usepackage{csquotes}
+
+% Impostazione Pacchetto per il codice in C++
+\usepackage{listings}          % for creating language style
+\input{arduinoLanguage.tex}    % adds the arduino language listing
+
+%% Define an Arduino style fore use later %%
+\lstdefinestyle{myArduino}{
+  language=Arduino,
+  basicstyle=\ttfamily\small,
+  %% Add other words needing highlighting below %%
+  morekeywords=[1]{},        % [1] -> dark green
+  morekeywords=[2]{},        % [2] -> light blue
+  morekeywords=[3]{},        % [3] -> bold orange
+  morekeywords=[4]{},        % [4] -> orange
+  %% The lines below add a nifty box around the code %%
+  frame=shadowbox,
+  rulesepcolor=\color{arduinoBlue},
+}
+\addto\captionsitalian{%
+  \renewcommand{\lstlistingname}{Codice}%
+  \renewcommand\lstlistlistingname{Codici}}
+
+
 \author{Virginia Marchetta}
 \date{\today}
 
