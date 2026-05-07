@@ -1,6 +1,6 @@
 # 📚 Appunti di Laboratorio di Fisica 3
 
-Questo repository contiene il codice sorgente in LaTeX per la stesura, la revisione e la condivisione degli appunti di Laboratorio 3 (Corso di Laurea in Fisica, Università di Catania).
+Questo repository contiene il codice sorgente in LaTeX per la stesura, la revisione e la condivisione degli appunti di Laboratorio 3 (Corso di Laurea in Fisica, Università di Catania) scritti dalla Dott.ssa Virginia Marchetta.
 
 Per aggirare i limiti di tempo nella compilazione di file di grandi dimensioni imposti dalle versioni gratuite di piattaforme come Overleaf o Prism, abbiamo strutturato il progetto su **GitHub**. In questo modo, ognuno lavorerà in locale, sfruttando la potenza del proprio computer per generare i PDF, e sincronizzerà le modifiche tramite Git.
 
