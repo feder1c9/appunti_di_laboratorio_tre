@@ -580,15 +580,18 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
     
     I programmi sono scritti al PC utilizzando il software Arduino vengono trasmessi mediante la porta seriale USB al microcontrollore ATmega 328P e memorizzati nella memoria EEPROM\footnote{La EEPROM (Electrically Erasable Programmable Read-Only Memory) è un tipo di memoria non volatile, cancellabile e riprogrammabile elettricamente, utilizzata in elettronica per memorizzare piccole quantità di dati che devono persistere anche senza alimentazione. È molto comune nei microcontrollori e centraline auto} del microcontrollore ATmega 328P. Il programma viene eseguito successivamente in modo ciclico. Il codice sorgente di un programma per Arduino si chiama sketch. La struttura di base di un programma (sketch) scritto per la scheda Arduino è molto semplice e può essere suddiviso in tre parti:
 
-    Il codice Arduino è sempre diviso in due parti. Queste parti sono rappresentate dalle funzioni \lstinline[style=myArduino]{void setup()} e \lstinline[style=myArduino]{void loop()}. 
-    
-    Dentro il \lstinline[style=myArduino]{void setup()} vengono inserite tutte le istruzioni che vanno eseguite soltanto una ed una sola volta durante l'esecuzione: queste rappresentano appunto il setup, come ad esempio l'inizializzazione pin di input e output, dello stato dei pin o della comunicazione USB. 
+    \begin{itemize}[leftmargin=1.2cm, itemsep=1pt, topsep=5pt]
+      \item la prima parte, posta generalmente all’inizio dello sketch per una migliore leggibilità, contiene l’inserimento degli eventuali file di libreria e la dichiarazione di tutte le variabili che verranno utilizzate. Le variabile poste in questa sezione sono variabili globali.
+      \item  la seconda parte, costituita dalla funzione \lstinline[style=myArduino]{void setup()} utilizzata per configurare la scheda, per esempio per programmare i pin digitali in ingresso o uscita. Queste istruzioni vengono eseguite solo una volta.
+      \item la terza parte, costituita dalla funzione \lstinline[style=myArduino]{void loop()} che contiene il programma da eseguire ciclicamente. 
+    \end{itemize}
 
-    All'interno del \lstinline[style=myArduino]{void loop()} vanno inserite tutte le istruzioni che verranno ripetute ciclicamente durante l'esecuzione del programma, come ad esempio l'accensione e lo spegnimento periodico di un led, di un controllo di un sensore ecc.
+    Entrambe le funzioni sono necessarie per l’esecuzione del programma. Il contenuto scritto dentro le parentesi graffe della funzione setup, contiene la dichiarazione delle variabili, viene eseguita una sola volta e serve per programmare i pin del Microcontrollore ATmega 328P utilizzando la funzione pinMode, o per inizializzare la comunicazione seriale. 
+    La funzione loop include il codice da eseguire in modo continuo: lettura ingressi, attivazione uscite, ecc.
 
 
   \section{Arduino Uno}
-    % Panoramica della scheda.
+    
     Arduino UNO è la scheda ideale per iniziare con l'elettronica e la programmazione ed è una delle schede più robuste con cui si può iniziare. UNO è la scheda più utilizzata e documentata dell'intera famiglia Arduino.
 
 
@@ -598,31 +601,31 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
     \caption{Scheda Arduino Uno}\label{fig:arduino_uno}
     \end{figure}
 
-    Arduino UNO è una scheda a microcontrollore basata sull'ATmega328P. Dispone di diversi ingressi:
+    Arduino UNO è una scheda a microcontrollore basata sull'ATmega328P prodotto da Atmel. Presenta queste caratteristiche:
 
     \begin{itemize}[leftmargin=1.2cm, itemsep=1pt, topsep=5pt]
-    \item 14 pin di input/output digitali (di cui 6 utilizzabili come uscite PWM);
-    \item 6 ingressi analogici;
-    \item un risonatore ceramico da 16 MHz (Clock);
-    \item connessione porta USB;
-    \item un connettore di alimentazione jack;
-    \item un connettore ICSP\footnote{L'ICSP (In-Circuit Serial Programming) su Arduino è un metodo per programmare il microcontrollore direttamente sulla scheda (o su breadboard) senza rimuoverlo, utilizzando il protocollo SPI. È essenziale per "masterizzare" (caricare) il bootloader, ripristinare schede bloccate o programmare chip vergini.};
-    \item un pulsante per il reset.
+      \item 14 pin di input/output digitali (di cui 6 utilizzabili come uscite PWM);
+      \item 6 ingressi analogici;
+      \item un risonatore ceramico da 16 MHz (Clock);
+      \item connessione porta USB;
+      \item un connettore di alimentazione jack;
+      \item un connettore ICSP\footnote{L'ICSP (In-Circuit Serial Programming) su Arduino è un metodo per programmare il microcontrollore direttamente sulla scheda (o su breadboard) senza rimuoverlo, utilizzando il protocollo SPI. È essenziale per "masterizzare" (caricare) il bootloader, ripristinare schede bloccate o programmare chip vergini.};
+      \item un pulsante per il reset.
     \end{itemize}
 
     Tale scheda contiene tutto il necessario per il funzionamento del microcontrollore; è sufficiente collegarla a un computer tramite un cavo USB o alimentarla con un adattatore CA/CC o una batteria per iniziare.
 
     \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.1]{image/foto_arduino/arduino_uno_esempio.jpg}
+    \includegraphics[scale=0.3]{image/foto_arduino/arduino_uno_esempio.jpg}
     \caption{Esempio di utilizzo di Arduino Uno}\label{fig:arduino_uno_esempio}
     \end{figure}
 
-    Dopo aver visto le caratteristiche tecniche dell'Arduino Uno, andiamo a vedere che cosa sono e a cosa servono.
+    Ci sarebbe da riportare ulteriori caratteristiche tecniche ma non lo faremo perché esula dai nostri interessi.
 
     \subsection{I Pin di Arduino}
 
-    In generale, i pin sono quei componenti di un circuito che permettono il collegamento con altri dispositivi; in questo caso i pin sono dei fori che si trovano direttamente sulla scheda con cui possiamo collegare altre boards, sensori ed atturatori mediante dei cavetti.
+    In generale, i pin sono quei componenti di un circuito che permettono il collegamento con altri dispositivi; in questo caso i pin sono dei fori che si trovano direttamente sulla scheda con cui possiamo collegare altre boards, sensori ed attuatori mediante dei cavetti.
 
     I cavetti forniti solitamente in dotazione con Arduino possono essere di tipo maschio-maschio, maschio-femmina oppure femmina-femmina. Combinandoli opportunamente si ottengono collegamenti più lunghi, utili per connettere dispositivi più lontani all'interno del circuito.
 
