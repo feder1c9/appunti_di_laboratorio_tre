@@ -569,17 +569,22 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
           \end{itemize}
     \item \textit{l'editor di testo}: la parte più importante dove all'interno viene scritto il vero e proprio codice che ci permetterà di gestire variabili, sensori ed attuatori mediante alcune funzioni. Una volta salvato lo skecth quest'ultimo sarà un file con estensione ".ino". L'editor dell'ambiente di sviluppo,  oltre alle solite funzioni presenti in tutti editor, ha delle caratteristiche particolari che facilitano la scrittura dei programmi, in particolare:
           \begin{itemize}[leftmargin=1.2cm, itemsep=1pt, topsep=5pt]
-            \item 
+            \item il syntax highlighting, cioè la capacità di evidenziare il testo con colori diversi in base alle regole del linguaggio di programmazione utilizzato;
+            \item l'auto-indentazione: l'editor provvede ad indentare correttamente il codice mentre lo si digita (ad esempio aumentando di due spazi il rientro del blocco di codice di una funzione).
           \end{itemize}
   \end{itemize}
 
-  
+    \subsection{Il linguaggio di programmazione}
 
-  Il codice Arduino è sempre diviso in due parti. Queste parti sono rappresentate dalle funzioni \lstinline[style=myArduino]{void setup()} e \lstinline[style=myArduino]{void loop()}. 
-  
-  Dentro il \lstinline[style=myArduino]{void setup()} vengono inserite tutte le istruzioni che vanno eseguite soltanto una ed una sola volta durante l'esecuzione: queste rappresentano appunto il setup, come ad esempio l'inizializzazione pin di input e output, dello stato dei pin o della comunicazione USB. 
+    Il linguaggio di programmazione usato in Arduino si basa su C/C++ ed è integrato da un framework chiamato Wiring, progettato per semplificare la creazione di prototipi elettronici con funzioni per gestire in maniera semplice le interfacce di input/output della scheda.
+    
+    I programmi sono scritti al PC utilizzando il software Arduino vengono trasmessi mediante la porta seriale USB al microcontrollore ATmega 328P e memorizzati nella memoria EEPROM\footnote{La EEPROM (Electrically Erasable Programmable Read-Only Memory) è un tipo di memoria non volatile, cancellabile e riprogrammabile elettricamente, utilizzata in elettronica per memorizzare piccole quantità di dati che devono persistere anche senza alimentazione. È molto comune nei microcontrollori e centraline auto} del microcontrollore ATmega 328P. Il programma viene eseguito successivamente in modo ciclico. Il codice sorgente di un programma per Arduino si chiama sketch. La struttura di base di un programma (sketch) scritto per la scheda Arduino è molto semplice e può essere suddiviso in tre parti:
 
-  All'interno del \lstinline[style=myArduino]{void loop()} vanno inserite tutte le istruzioni che verranno ripetute ciclicamente durante l'esecuzione del programma, come ad esempio l'accensione e lo spegnimento periodico di un led, di un controllo di un sensore ecc.
+    Il codice Arduino è sempre diviso in due parti. Queste parti sono rappresentate dalle funzioni \lstinline[style=myArduino]{void setup()} e \lstinline[style=myArduino]{void loop()}. 
+    
+    Dentro il \lstinline[style=myArduino]{void setup()} vengono inserite tutte le istruzioni che vanno eseguite soltanto una ed una sola volta durante l'esecuzione: queste rappresentano appunto il setup, come ad esempio l'inizializzazione pin di input e output, dello stato dei pin o della comunicazione USB. 
+
+    All'interno del \lstinline[style=myArduino]{void loop()} vanno inserite tutte le istruzioni che verranno ripetute ciclicamente durante l'esecuzione del programma, come ad esempio l'accensione e lo spegnimento periodico di un led, di un controllo di un sensore ecc.
 
 
   \section{Arduino Uno}
