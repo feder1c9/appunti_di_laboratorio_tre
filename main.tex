@@ -548,16 +548,36 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
     \caption{IDE di Arduino}\label{fig:ide_arduino}
   \end{figure}
 
-  Il codice Arduino è sempre diviso in due parti. Queste parti sono rappresentate dalle funzioni \lstinline[style=myArduino]{void setup()} e \lstinline[style=myArduino]{void loop()}. Nella prima funzione vengono inserite tutte le istruzioni che vanno eseguite soltanto una ed una sola volta durante l'esecuzione: queste rappresentano appunto il setup, come ad esempio l'inizializzazione pin di input e output, dello stato dei pin o
+  Come si vede in \cref{fig:ide_arduino} l'IDE è suddivisa in diverse sezioni:
 
-  Prova
+  \begin{itemize}[leftmargin=1.2cm, itemsep=1pt, topsep=5pt]
+    \item \textit{la barra superiore}. Partendo da sinistra troviamo:
+          \begin{itemize}[leftmargin=0.5cm, itemsep=1pt, topsep=3pt]
+            \item il pulsante di \textit{compilazione} per compilare il codice e vedere se sono presenti errori;
+            \item il pulsante di \textit{caricamento} per caricare il codice sulla board;
+            \item il pulsante di \textit{debug} per avviare una sessione di debug interattiva, che permette di analizzare il comportamento del codice in tempo reale e trovare errori.
+            \item uno \textit{slider} che ci permette di selezionare la scheda collegata tramite USB;
+            \item il \textit{serial plotter} ovvero un grafico che in tempo reale permette di rappresentare una grandezza proveniente da una variabile all'interno del codice;
+            \item il \textit{serial monitor} che permette di inviare e ricevere dati alla board attraverso la comunicazione USB.
+          \end{itemize}
+    \item \textit{la barra laterale}. Partendo dall'alto troviamo:
+          \begin{itemize} [leftmargin=1.2cm, itemsep=1pt, topsep=5pt]
+            \item lo \textit{sketchbook} ovvero la cartella principale dove vengono salvati i progetti (chiamati "sketch") e le relative librerie;
+            \item il \textit{gestore delle schede} che serve a installare, aggiornare o rimuovere il supporto per le diverse schede microcontrollore ;
+            \item il \textit{gestore librerie} che serve a ricercare, installare, aggiornare e gestire facilmente le librerie di terze parti e quelle ufficiali;
+            \item gli ultimi due sono il pulsante di debug e il pulsante di ricerca.
+          \end{itemize}
+    \item \textit{l'editor di testo}: la parte più importante dove all'interno viene scritto il vero e proprio codice che ci permetterà di gestire variabili, sensori ed attuatori mediante alcune funzioni.
+  \end{itemize}
+
+  Il codice Arduino è sempre diviso in due parti. Queste parti sono rappresentate dalle funzioni \lstinline[style=myArduino]{void setup()} e \lstinline[style=myArduino]{void loop()}. 
   
-  Queste due parti sono rappresentate dalle funzioni setup e loop. Esse non devono mai mancare all'interno di uno sketch di Arduino. In caso contrario verrà generato un messaggio di errore. A titolo di esempio, si riporta di seguito lo sketch del lampeggio del led integrato di una scheda Arduino:
+  Dentro il \lstinline[style=myArduino]{void setup()} vengono inserite tutte le istruzioni che vanno eseguite soltanto una ed una sola volta durante l'esecuzione: queste rappresentano appunto il setup, come ad esempio l'inizializzazione pin di input e output, dello stato dei pin o della comunicazione USB. 
+
+  All'interno del \lstinline[style=myArduino]{void loop()} vanno inserite tutte le istruzioni che verranno ripetute ciclicamente durante l'esecuzione del programma, come ad esempio l'accensione e lo spegnimento periodico di un led, di un controllo di un sensore ecc.
 
 
-  \section{Il linguaggio di programmazione}
-
-    \subsection{Arduino Uno}
+  \section{Arduino Uno}
     % Panoramica della scheda.
     Arduino UNO è la scheda ideale per iniziare con l'elettronica e la programmazione ed è una delle schede più robuste con cui si può iniziare. UNO è la scheda più utilizzata e documentata dell'intera famiglia Arduino.
 
