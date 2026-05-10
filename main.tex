@@ -589,6 +589,16 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
     Entrambe le funzioni sono necessarie per l’esecuzione del programma. Il contenuto scritto dentro le parentesi graffe della funzione setup, contiene la dichiarazione delle variabili, viene eseguita una sola volta e serve per programmare i pin del Microcontrollore ATmega 328P utilizzando la funzione pinMode, o per inizializzare la comunicazione seriale. 
     La funzione loop include il codice da eseguire in modo continuo: lettura ingressi, attivazione uscite, ecc.
 
+    Alcuni delle funzioni più utilizzate sono:
+    \begin{itemize}[leftmargin=1.2cm, itemsep=1pt, topsep=5pt]
+      \item \lstinline[style=myArduino]{pinMode(pin, INPUT/OPUTPUT)};
+      \item \lstinline[style=myArduino]{digitalRead(pin)};
+      \item \lstinline[style=myArduino]{digitalWrite(pin, HIGH/LOW)};
+      \item \lstinline[style=myArduino]{analogRead(pin)};
+      \item \lstinline[style=myArduino]{analogWrite(pin, valore)};
+      \item \lstinline[style=myArduino]{delay(tempo)};
+    \end{itemize}
+
 
   \section{Arduino Uno}
     
@@ -641,7 +651,7 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
 
     \begin{figure}[H]
         \centering
-        \includegraphics[scale=0.2]{image/foto_arduino/alta_impedenza.png}
+        \includegraphics[scale=0.18]{image/foto_arduino/alta_impedenza.png}
         \caption{Alta impedenza Arduino}\label{fig:alta_impedenza}
     \end{figure}
 
