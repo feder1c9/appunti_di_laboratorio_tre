@@ -586,17 +586,17 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
       \item la terza parte, costituita dalla funzione \lstinline[style=myArduino]{void loop()} che contiene il programma da eseguire ciclicamente. 
     \end{itemize}
 
-    Entrambe le funzioni sono necessarie per l’esecuzione del programma. Il contenuto scritto dentro le parentesi graffe della funzione setup, contiene la dichiarazione delle variabili, viene eseguita una sola volta e serve per programmare i pin del Microcontrollore ATmega 328P utilizzando la funzione pinMode, o per inizializzare la comunicazione seriale. 
+    Entrambe le funzioni sono necessarie per l’esecuzione del programma. Il contenuto scritto dentro le parentesi graffe della funzione setup, che contiene la dichiarazione delle variabili, viene eseguita una sola volta e serve per programmare i pin del Microcontrollore ATmega 328P utilizzando la funzione pinMode, o per inizializzare la comunicazione seriale. 
     La funzione loop include il codice da eseguire in modo continuo: lettura ingressi, attivazione uscite, ecc.
 
     Alcuni delle funzioni più utilizzate sono:
     \begin{itemize}[leftmargin=1.2cm, itemsep=1pt, topsep=5pt]
-      \item \lstinline[style=myArduino]{pinMode(pin, INPUT/OPUTPUT)};
-      \item \lstinline[style=myArduino]{digitalRead(pin)};
-      \item \lstinline[style=myArduino]{digitalWrite(pin, HIGH/LOW)};
-      \item \lstinline[style=myArduino]{analogRead(pin)};
-      \item \lstinline[style=myArduino]{analogWrite(pin, valore)};
-      \item \lstinline[style=myArduino]{delay(tempo)};
+      \item \lstinline[style=myArduino]{pinMode(pin, INPUT)} e \lstinline[style=myArduino]{pinMode(pin, OUTPUT)}: servono ad inizializzare un pin di Arduino come ingresso o uscita;
+      \item \lstinline[style=myArduino]{digitalRead(pin)}: serve a leggere lo stato alto o basso del pin di ingresso;
+      \item \lstinline[style=myArduino]{digitalWrite(pin, HIGH)} e \lstinline[style=myArduino]{digitalWrite(pin, LOW)}: servono a cambiare lo stato del pin di uscita. Lo stato \lstinline[style=myArduino]{HIGH} corrisponde a 5V mentre lo stato \lstinline[style=myArduino]{LOW} a 0V;
+      \item \lstinline[style=myArduino]{analogRead(pin)}: serve a leggere i valori dell'ingresso analogico. I valori vanno da 0 a 1023 dove anche qua 0 corrisponde a 0 V e 1023 a 5V. Vedremo dopo perché l'ingresso analogico dà questi valori;
+      \item \lstinline[style=myArduino]{analogWrite(pin, valore)}: permette di dare una tensione variabile da 0 a 5V al pin di uscita variando il parametro "valore" che va da 0 a 255. Questo è possibile grazie al PWM che approfondiremo in seguito;
+      \item \lstinline[style=myArduino]{delay(tempo)}: mette in pausa per un certo tempo la scheda. Quindi, se ad esempio usiamo \lstinline[style=myArduino]{delay(1000)}, l'Arduino rimarrà in attesa per un tempo pari a 1000ms cioè 1 secondo. Durante questo intervallo la scheda riamane "bloccata", nel senso che non leggerà nessun valore di ingresso e non modificherà lo stato dei pin di output. Il microcontrollore sarà occupato semplicemente a contare il tempo che scorre. 
     \end{itemize}
 
 
@@ -647,7 +647,7 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
 
     Impostare i pin di Arduino come ingresso o uscita digitale è molto semplice: all'interno della funzione \lstinline[style=myArduino]{void setup()} basta inserire \lstinline[style=myArduino]{pinMode(pin, INPUT)} nel caso in cui volessimo usare il pin come ingresso digitale o \lstinline[style=myArduino]{pinMode(pin, OUTPUT)} nel caso in cui volessimo usare il pin come uscita digitale. Di default i pin digitali sono impostati come ingressi, quindi non è necessario dichiararli esplicitamente con \lstinline[style=myArduino]{pinMode()}: farlo, però, è buona abitudine così da non confondersi con altri pin della scheda durante la stesura del codice.
 
-    I pin di ingresso richiedono una corrente estremamente bassa al circuito con cui sono collegati. Infatti, quest'ultimo vede il pin come un resistore equivalente di $100 M\Omega$ e ciò significa che è necessaria pochissima corrente per far commutare il pin di ingresso da uno stato all'altro. Se all'interno del codice il pin viene configurato lo stesso con \lstinline[style=myArduino]{pinMode(pin, INPUT)} e se non viene collegato nulla, o se i fili collegati non sono connessi ad altri circuiti, vi saranno dei cambiamenti repentini e casuali dello stato del pin a causa del rumore elettrico dall'ambiente circostante.
+    I pin di ingresso richiedono una corrente estremamente bassa al circuito con cui sono collegati. Infatti, quest'ultimo vede il pin come un resistore equivalente di $100 M\Omega$ e ciò significa che è necessaria pochissima corrente per far commutare il pin di ingresso da uno stato all'altro. Se all'interno del codice il pin viene configurato lo stesso con \lstinline[style=myArduino]{pinMode(pin, INPUT)} e se non viene collegato nulla, o se i fili collegati non sono connessi ad altri circuiti, vi saranno dei cambiamenti repentini e casuali dello stato del pin a causa del rumore elettrico dell'ambiente circostante.
 
     \begin{figure}[H]
         \centering
@@ -657,12 +657,16 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
 
     Vediamo adesso alcuni esempi per poter utilizzare i pin di Arduino come uscite digitali o ingressi digitali.
 
-    %Esempio collegamento pin di uscita (led)
+    \paragraph{Uscita digitale}
+
+
+
+    \paragraph{Ingresso digitale}
 
     Immaginiamo ora di voler collegare un pulsante o un interruttore ad un pin di Arduino. Sappiamo già che di default quest'ultimo è impostato come un ingresso digitale e quindi non ci sarà il bisogno di inserire all'interno del codice la funzione \lstinline[style=myArduino]{pinMode()}. \\
-    Colleghiamo quindi un'estremità (o terminale) del pulsante al pin di Arduino e l'altro al GND. Dentro il \lstinline[style=myArduino]{void loop()} ci sarà la parte di programma che accenderà un led quando premiamo il pulsante e che lo spegnerà quando non lo premiamo.
+    Colleghiamo quindi un'estremità (o terminale) del pulsante al pin di Arduino e l'altro al GND, ovvero il terminale posto a potenziale 0 V. Dentro il \lstinline[style=myArduino]{void loop()} ci sarà la parte di programma che accenderà un led quando premiamo il pulsante e che lo spegnerà quando non lo premiamo.
 
-    Sembrebbe essere molto semplice: quando il pin di ingresso legge uno stato logico basso accende il led, quando legge uno stato logico alto lo spegne. Ebbene, in questo ragionamento che abbiamo fatto c'è un problema. Quando premiamo il pulsante tutto funziona correttamente: essendo collegato al GND si porta ad uno stato logico basso e il led viene acceso. Invece, quando non lo premiamo lo stato del pulsante non è determinato, proprio perché l'ingresso di Arduino è un ingresso ad alta impedenza. Il led potrebbe quindi o accendersi o spegnersi o addirittura lampeggiare proprio perché lo stato del pin di ingresso viene influenzato dal rumore esterno.
+    Sembrerebbe essere molto semplice: quando dal pin di ingresso viene letto uno stato logico basso viene acceso il led, quando viene letto uno stato logico alto viene spento. Ebbene, in questo ragionamento che abbiamo fatto c'è però un problema. Quando premiamo il pulsante tutto funziona correttamente: essendo collegato al GND si porta ad uno stato logico basso e il led viene acceso. Invece, quando non lo premiamo lo stato del pulsante non è determinato, proprio perché non colleghiamo fisicamente il pin a nessun punto del circuito in cui ci sia una tensione elettrica. Il led potrebbe quindi o accendersi o spegnersi o addirittura lampeggiare proprio perché lo stato del pin di ingresso viene influenzato dal rumore esterno.
 
     Per evitare situazioni del genere, spesso è utile indirizzare un pin di ingresso ad uno stato noto. Tale operazione può essere fatta aggiungendo al pin di ingresso una resistenza di PULL-UP o di PULL-DOWN.
 
@@ -672,7 +676,17 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
         \caption{Resistenza di pull-up e pull-down}\label{fig:pull_up_pull_down}
     \end{figure}
 
-    Prova di modifica
+    Come si vede in \cref{fig:pull_up_pull_down} queste sono le due configurazioni che ci serviranno per collegare un pulsante o un interruttore ad Arduino. La resistenza di pull-up e di pull-down sono solitamente dell'ordine dei $k\Omega$ per limitare il passaggio di corrente all'interno del circuito\footnote{Evita di bruciare tutto}.
+
+    Nella configurazione di pull-up la resistenza viene collegata tra il nodo di alimentazione e il pulsante. Ricordando che all'interno del pin si ha un'alta impedenza, vediamo cosa accade nel caso in cui il pulsante viene premuto oppure no:
+    \begin{itemize}[leftmargin=1.2cm, itemsep=1pt, topsep=5pt]
+      \item \textit{Pulsante premuto}: quando premiamo il pulsante, colleghiamo la resistenza al nodo GND. Il pin di Arduino sarà anch'esso collegato al nodo GND e quindi la tensione letta dal pin sarà di 0V, proprio perché si tratta dello stesso nodo circuitale. La corrente passerà tranquillamente dai 5V al GND attraverso la resistenza.
+      \item \textit{Pulsante non premuto}: quando il pulsante non è premuto il pin è collegato solo alla resistenza. La corrente passerà attraverso la resistenza di pull-up e il pin ma essendo quest'ultimo in alta impedenza la corrente è molto piccola, quasi nulla, come se il circuito fosse aperto. Il pin corrisponderà al nodo di alimentazione e quindi la tensione letta sarà proprio 5 V.
+    \end{itemize}
+
+    \paragraph{Ingresso analogico}
+
+    Quando abbiamo un sensore o un trasduttore che produce un segnale di tipo analogico, per poter leggere i valori dobbiamo collegarlo ad un pin analogico. 
 
 
 \chapter{Sorgenti di Radiazione}
