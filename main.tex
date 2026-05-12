@@ -665,6 +665,24 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
 
     Se, però, mettessimo queste funzioni una dietro l'altra quello che accade è che il led rimarrà sempre acceso, e questo perché la velocità con Arduino esegue il programma è molto veloce e non ha il tempo di spegnere il led. Per questo, tra una funzione e l'altra inseriremo la funzione \lstinline[style=myArduino]{delay(tempo)} impostando un certo valore di tempo in millisecondi. 
 
+    Di seguito è riportato un esempio di utilizzo del pin digitale in output.
+
+    \begin{lstlisting}[style=myArduino, basicstyle=\ttfamily\footnotesize, caption={Esempio lampeggio led}, captionpos=b, label=code:lampeggio_LED]
+    #define LED 6
+
+    void setup(){
+      pinMode(LED, OUTPUT);
+    }
+
+    void loop(){
+      digitalWrite(LED, HIGH);
+      delay(1000);
+      digitalWrite(LED, LOW);
+      delay(1000);
+    }
+
+    \end{lstlisting}
+
     \paragraph{Ingresso digitale}
 
     Immaginiamo ora di voler collegare un pulsante o un interruttore ad un pin di Arduino. Sappiamo già che di default quest'ultimo è impostato come un ingresso digitale e quindi non ci sarà il bisogno di inserire all'interno del codice la funzione \lstinline[style=myArduino]{pinMode()}. \\
@@ -688,13 +706,62 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
       \item \textit{Pulsante non premuto}: quando il pulsante non è premuto il pin è collegato solo alla resistenza. La corrente passerà attraverso la resistenza di pull-up e il pin ma essendo quest'ultimo in alta impedenza la corrente è molto piccola, quasi nulla, come se il circuito fosse aperto. Il pin corrisponderà al nodo di alimentazione e quindi la tensione letta sarà proprio 5 V.
     \end{itemize}
 
+    Arduino permette di inizializzare i pin digitali con una resistenza di pull-up interna utilizzando la funzione \lstinline[style=myArduino]{pinMode(pin, INPUT_PULLUP)}, così da poter collegare direttamente il pulsante tra pin e GND senza utilizzare resistenze esterne. Qui di seguito riportiamo un esempio:
+
+    \begin{lstlisting}[style=myArduino, basicstyle=\ttfamily\footnotesize, caption={Esempio pulsante}, captionpos=b, label=code:pulsante]
+    #define PULSANTE 5
+    #define LED      6
+    
+    int valore_puls=LOW;
+
+    void setup(){
+      pinMode(PULSANTE, INPUT_PULLUP);
+      pinMode(LED, OUTPUT);
+    }
+    void loop(){
+      valore_puls = digitalRead(PULSANTE);
+      if(valore_puls == LOW){
+        digitalWrite(LED, HIGH);
+      }
+      else {
+        digitalWrite(LED; LOW);
+      }
+      delay(100);
+    }
+    \end{lstlisting}
+
+    Il breve \lstinline[style=myArduino]{delay(100)} serve principalmente a stabilizzare le letture dei sensori, ridurre il carico computazionale del microcontrollore e rendere più leggibili i dati sulla seriale. 
+
+
+
     \paragraph{Ingresso analogico}
 
     Quando abbiamo un sensore o un trasduttore che produce un segnale di tipo analogico, per poter leggere i valori dobbiamo collegarlo ad un pin analogico. 
 
     I pin analogici di Arduino sono collegati ad un convertitore analogico digitale (ADC) che, appunto, converte i segnali analogici in segnali digitali. In particolare, il convertitore di Arduino è un ADC a 10 bit, ciò significa che converte segnali che vanno da 0V a 5V in valori da 0 a 1023.\footnote{Per calcolare il numero di combinazioni basta fare $2^{10} = 1024$} La risoluzione di questo ADC si calcola molto semplicemente come $R = \frac{5 V}{2^{10}} = \frac{5 V}{1024} = 4.88mV$, ovvero ogni bit dell'ADC corrisponderà ad un valore di $4.88mV$.
 
-    All'interno del \lstinline[style=myArduino]{void setup()} non sarà necessario inizializzare il pin che vogliamo utilizzare con \lstinline[style=myArduino]{pinMode(pin, INPUT)} perché di default gli ingressi analogici di Arduino sono impostati come pin di ingresso. Dentro il \lstinline[style=myArduino]{void loop()}, per leggere il segnale analogico, bisogna utilizzare la funzione \lstinline[style=myArduino]{analogRead(pin)} e salvare questi valori in una variabile.
+    All'interno del \lstinline[style=myArduino]{void setup()} non sarà necessario inizializzare il pin che vogliamo utilizzare con \lstinline[style=myArduino]{pinMode(pin, INPUT)} perché di default gli ingressi analogici di Arduino sono impostati come pin di ingresso. Dentro il \lstinline[style=myArduino]{void loop()}, per leggere il segnale analogico, bisogna utilizzare la funzione \lstinline[style=myArduino]{analogRead(pin)} e salvare questi valori in una variabile. Di seguito un esempio.
+
+    \begin{lstlisting}[style=myArduino, basicstyle=\ttfamily\footnotesize, caption={Esempio pulsante}, captionpos=b, label=code:pulsante]
+    const int analogPin = A0; 
+
+    void setup() {
+      // Inizializza la comunicazione seriale a 9600 baud per stampare i dati
+      Serial.begin(9600);
+    }
+
+    void loop() {
+      // Legge il valore della tensione sul pin analogico A0
+      int sensorValue = analogRead(analogPin);
+
+      // Stampa il risultato sul Monitor Seriale
+      Serial.print("Valore sensore: ");
+      Serial.println(sensorValue);
+
+      // Pausa di 100 millisecondi per non saturare la comunicazione seriale
+      delay(100);
+    }
+    \end{lstlisting}
 
     \paragraph{Uscita analogica}
 
@@ -725,8 +792,64 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
       V_{RMS} = \sqrt{\frac{1}{T} \int_{0}^{T}v_{pwm}^{2}(t) dt}
     \end{equation*}
 
-    In genere, si applica a segnali di tensione o corrente al fine di calcolare gli effetti sul carico. In altre, parole il valore efficace (di tensione o di una corrente) è quel valore di segnale in continua che produce su una resistenza gli stessi effetti (dissipazione di potenza) di un segnale non continuo. 
+    In genere, si applica a segnali di tensione o corrente al fine di calcolare gli effetti sul carico. In altre, parole il valore efficace (di tensione o di una corrente) è quel valore di segnale in continua che produce su una resistenza gli stessi effetti (dissipazione di potenza) di un segnale non continuo.
 
+    \begin{equation*}
+      \langle P \rangle = V_{RMS} I_{RMS}  
+    \end{equation*}
+
+    ovvero, il valore efficace è equivalente al valore della corrente continua, in grado di produrre la stessa dissipazione di potenza in un carico resistivo. Nel caso di onda quadra con ampiezza 5V e duty cycle D, si ha:
+
+    \begin{equation*}
+      V_{RMS} = \sqrt{\frac{1}{T}\biggl[ \int_{0}^{t_{on}} 5^2 dt + \int_{t_{on}}^{T} 0^2 dt \biggr]} = \sqrt{\frac{1}{T} 5^2 \biggr[ \int_{0}^{t_{on}} 1 dt \biggl]} =\sqrt{\frac{t_{on}}{T} 5^2} =\sqrt{5^2 D}
+    \end{equation*}
+
+    dove nell'ultimo passaggio abbiamo utilizzato la definizione di duty cycle. Possiamo quindi ricavare l'espressione generale:
+
+    \begin{equation*}
+      V_{RMS} = \sqrt{D(V_{max}^2)}
+    \end{equation*}
+
+    da questa ultima espressione è evidente che il valore efficace sarà dipendente da D, ottenendo valori compresi tra 0 e $V_{max}$. 
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.25]{image/foto_arduino/variazione_duty_cycle.jpg}
+        \caption{Variazione del Duty cycle}\label{fig:variazione_duty_cycle}
+    \end{figure}
+
+    In questo modo si potranno pilotare diversi dispositivi sfruttando questa modulazione di segnale. Ad esempio, applicazioni tipiche del PWM sono il controllo della luminosità dei LED, il controllo di motori, la gestione delle ventole del pc, ecc.
+
+    All'interno del codice, per poter utilizzare il PWM, si utilizza la funzione \lstinline[style=myArduino]{analogWrite(pin, valore)} dove valore indica il valore da 0 a 255 del duty cycle, proporzionato in una scala percentuale. Quindi un valore di 255 rappresenta un duty cycle al 100\%, un valore di 126 indica un duty cycle al 50\% e così via. 
+
+    \begin{lstlisting}[style=myArduino, basicstyle=\ttfamily\footnotesize, caption={Esempio uscita analogica}, captionpos=b, label=code:pwm]
+    #define LED 9 
+
+    void setup() {
+      // A differenza delle letture analogiche, i pin usati per il PWM 
+      // devono essere esplicitamente dichiarati come OUTPUT
+      pinMode(LED, OUTPUT);
+    }
+
+    void loop() {
+      // Ciclo per aumentare gradualmente il segnale da 0 a 255
+      for (int luminosita = 0; luminosita <= 255; luminosita++) {
+        analogWrite(LED, luminosita);
+        // Una piccola pausa per rendere l'effetto visibile all'occhio umano
+        delay(10); 
+      }
+
+      // Ciclo per diminuire gradualmente il segnale da 255 a 0
+      for (int luminosita = 255; luminosita >= 0; luminosita--) {
+        analogWrite(pwmPin, luminosita);
+        delay(10);
+      }
+    }
+    \end{lstlisting}
+
+    \paragraph{Comunicazione seriale}
+
+    
 
 \chapter{Sorgenti di Radiazione}
 Le sorgenti radioattive forniscono un mezzo conveniente per testare e calibrare i rivelatori e sono strumenti essenziali sia nel laboratorio di fisica nucleare che in quello delle alte energie. Una comprensione dei processi nucleari di base nelle sorgenti radioattive è quindi una necessità prima di iniziare a lavorare in laboratorio\footnote{Per una discussione più dettagliata rimandiamo il lettore a uno qualsiasi dei testi standard di fisica nucleare per maggiori informazioni.}.\\
