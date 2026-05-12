@@ -211,60 +211,6 @@ Software più recenti della stessa Casa: Data Studio,...
 \end{itemize}
 
 
-
-
-
-
-
-
-\chapter{Arduino Vecchio}
-Arduino è una piattaforma hardware open-source capace di leggere un input, e tramite un set di istruzione è possibile creare progetti interattivi. Arduino si pone come lo strumento che permette una correlazione tra un microprocessore e il mondo esterno. \\
-Tra le diverse schede sviluppate negli anni, la scheda utilizzata è l' \textit{Arduino uno board}. 
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.5]{Screenshot_20-3-2024_181852_.jpeg}
-    \caption{Arduino uno}
-    \label{fig:arduino_uno_vecchio}
-\end{figure}
-Tale schede è composta da 14 input/output pins digitali, 6 input pins analogici. La programmazione della scheda avviene tramite una porta USB, che permette la connessione con il PC, ove è istallato il software IDE: Integrated Development Enviroment, ovvero una paittaforma che permette la compilazione e il trasferimento del codice (sketch) alla scheda. \\
-\newpage
-\section{Linguaggio di programmazione}
-Il linguaggio di Arduino è una sorta di C semplificato, per inizializzare uno sketch si fa uso della seguente struttura: \begin{center}
-    Variable definition \\
-void setup() \{ \\
-// put your setup code here, to run once:\\
-\}
-void loop() \{\\
-// put your main code here, to run repeatedly:\\
-\}
-\end{center}
-Dove: \begin{itemize}
-    \item setup: permette di inzializzare le variabili e i pin.
-    \item loop: permette la run in maniera continua dello sketch, fin quanto la scheda è accesa, in tale struttura vengono inserite le istruzioni.
-\end{itemize}
-La sintassi di tale linguaggio è del tutto analoga al C, inoltre la definizione dei pin avviene attraverso la funzione \textbf{pinMode()} che definisce se un pin è input o output. \\
-Si è gia accennato che gli input possono essere di due tipi: digitali e analogici. \\
-Un input digitale può assumere solo 2 valori: \begin{itemize}
-    \item 0 (0V) = LOW
-    \item 1 (5V) = HIGH
-\end{itemize}
-è possibile fissare un valore ad un determinato Pin tramite la funzione \textbf{digitalWrite} e leggere tale valore tramite la funzione \textbf{digitalRead}. Arduino impiega 10 $\mu s$ per leggere un input digitale.  \\ \\
-Un input analogico può assumere valori continui tra 0V e 5V, in maniera proporzionale alla grandezza fisica con cui ci si sta confrontando. A tali input sono associati dei sensori, chiamati: \textit{Sensori analogici}. Tali sensori devono essere collegati al \textbf{GROUND}. Alcuni tra questi sensori presentano 3 pin, in modo tale da essere collegati direttamente al \textbf{GROUND}, ai 5V e all'input analogico della scheda di arduino.\\
-
-\section{Come posso leggere gli analog input?}
-Il valore di tensione proporzionale alla grandezza fisica con cui ci si sta confrontando è trasformata in numeri compresi tra 0 e 1023 (ovvero 1024 possibili valori). \\
-Tale processo è effettuato tramite l'utilizzo di un particolare circuito elettrico: \textbf{ADC} (Analog to Digital Converter), che si trova direttamente sulla scheda Arduino. \\
-I valori sono proprio 1024 in quanto dipendono dalla risoluzione dell' ADC, dettata dal numero di bits (10 per arduino, e dunque $2^{10}=1024$). \\
-La variazione minima di tensione che possiamo apprezzare è dettata dal numero di valori che possono essere assunti, appunto nel caso di Arduino:
-\begin{equation}
-    \Delta V_{min} = \frac{5 V}{2^{10}}= 4.88 mV
-\end{equation}
-Inoltre Arduino impiega 100 $\mu s$ per leggere un input analogico.
-
-\section{Sketch di Arduino}
-Le attività sono proposte dalla docente. 
-
 \chapter{Sistemi di controllo}
 
 Nella vita di tutti i giorni, ognuno di noi compie delle azioni che gli permettono di interfacciarsi e dialogare con il mondo esterno: dallo svegliarsi e prepararsi un caffè, fino a guidare l'auto per andare al lavoro.
@@ -849,7 +795,20 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
 
     \paragraph{Comunicazione seriale}
 
-    
+    La comunicazione seriale è il sistema con cui Arduino scambia dati con il computer (via cavo USB) o con altri componenti (usando i pin fisici RX per la ricezione e TX per la trasmissione). Viene usata principalmente per due scopi: inviare dati al PC per visualizzarli sul Monitor Seriale (fase di test e debugging) o ricevere comandi dal PC. 
+
+    Quando dobbiamo inizializzare la comunicazione seriale è necessario inserire un numero che rappresenta ila velocità di comunicazione. Questo valore è chiamato Baud (o Baud Rate)\footnote{E non i Baudi del fantasanremo} ed indica,appunto, la velocità di trasmissione dei dati, misurata in bit al secondo (bps). 
+
+    La regola che si segue è che Arduino e il dispositivo con cui comunica (come il Monitor Seriale dell' IDE) devono essere impostati esattamente allo stesso baud rate. Se le velocità non coincidono, il ricevitore interpreterà male i segnali elettrici e sullo schermo appariranno solo caratteri incomprensibili. Lo standard storico è di 9600 baud, sufficiente per quasi tutti i progetti di base. Valori più alti come 115200 vengono usati quando si devono trasferire grandi quantità di dati molto rapidamente (ad esempio, sensori di movimento ad alta frequenza o moduli Wi-Fi).
+
+    All'interno del codice, nel \lstinline[style=myArduino]{void setup()} andrà inserito quindi \lstinline[style=myArduino]{Serial.begin(9600)} e nel \lstinline[style=myArduino]{void loop()} andrà inserito:
+
+    \begin{itemize}[leftmargin=1.2cm, itemsep=1pt, topsep=5pt]
+      \item \lstinline[style=myArduino]{Serial.print(valore)}: Invia il dato al Monitor Seriale e lascia il cursore alla fine del dato appena stampato. Qualsiasi istruzione di stampa successiva continuerà sulla stessa riga, attaccata a destra.
+      \item \lstinline[style=myArduino]{Serial.println(valore)}: Il suffisso "ln" sta per line. Invia il dato e poi aggiunge i comandi invisibili di "ritorno a capo". L'istruzione di stampa successiva ripartirà dalla riga sottostante.
+    \end{itemize}
+
+
 
 \chapter{Sorgenti di Radiazione}
 Le sorgenti radioattive forniscono un mezzo conveniente per testare e calibrare i rivelatori e sono strumenti essenziali sia nel laboratorio di fisica nucleare che in quello delle alte energie. Una comprensione dei processi nucleari di base nelle sorgenti radioattive è quindi una necessità prima di iniziare a lavorare in laboratorio\footnote{Per una discussione più dettagliata rimandiamo il lettore a uno qualsiasi dei testi standard di fisica nucleare per maggiori informazioni.}.\\
