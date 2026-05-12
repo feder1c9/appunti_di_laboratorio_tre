@@ -702,9 +702,31 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
 
     Se adesso volessimo modulare la luminosità del led allora dovremmo cambiare la tensione applicata al led. Solitamente nelle board di questo tipo è presente un componente che fa il lavoro opposto dell'ADC ovvero il convertitore digitale analogico (DCA) che converte un valore digitale in un valore analogico.
 
-    Arduino, però, non dispone di un DCA al suo interno. Per poter avere una tensione analogica in uscita viene sfruttata un'altra tecnica: il PWM.\\
-    Il PWM (Pulse Width Modulation) ovvero modulazione d'ampiezza di impulso, è una tecnica che permette di generare un segnale di onda quadra con un \textit{duty cycle}.  
+    Arduino, però, non dispone di un DCA al suo interno. Per poter avere una tensione analogica in uscita viene sfruttata un'altra tecnica: il \textit{PWM}.\\
+    Il PWM (Pulse Width Modulation) ovvero modulazione d'ampiezza di impulso, è una tecnica che permette di generare un segnale di onda quadra con un \textit{duty cycle} variabile.
     
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.35]{image/foto_arduino/duty_cycle.png}
+        \caption{Duty cycle}\label{fig:duty_cycle}
+    \end{figure}
+
+    Il duty cycle è definito come quell'intervallo di tempo in cui si ha lo stato alto rispetto al periodo totale:
+
+    \begin{equation*}
+      D  = \frac{t_{on}}{T}
+    \end{equation*}
+    
+    e per come è definito può variare tra 0 e 1. Solitamente si riporta il valore in percentuale quindi tra 0 \% e 100 \%. Variare questo parametro D del segnale permette di ottenere una tensione variabile dipendente dal rapporto tra la durata dell'impulso positivo e di quello totale.
+
+    Introduciamo il concetto di \textit{valore efficace RMS} (Root Mean Square) di una funzione, definito come la media quadratica sul periodo della funzione stessa:
+
+    \begin{equation*}
+      V_{RMS} = \sqrt{\frac{1}{T} \int_{0}^{T}v_{pwm}^{2}(t) dt}
+    \end{equation*}
+
+    In genere, si applica a segnali di tensione o corrente al fine di calcolare gli effetti sul carico. In altre, parole il valore efficace (di tensione o di una corrente) è quel valore di segnale in continua che produce su una resistenza gli stessi effetti (dissipazione di potenza) di un segnale non continuo. 
+
 
 \chapter{Sorgenti di Radiazione}
 Le sorgenti radioattive forniscono un mezzo conveniente per testare e calibrare i rivelatori e sono strumenti essenziali sia nel laboratorio di fisica nucleare che in quello delle alte energie. Una comprensione dei processi nucleari di base nelle sorgenti radioattive è quindi una necessità prima di iniziare a lavorare in laboratorio\footnote{Per una discussione più dettagliata rimandiamo il lettore a uno qualsiasi dei testi standard di fisica nucleare per maggiori informazioni.}.\\
