@@ -659,7 +659,11 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
 
     \paragraph{Uscita digitale}
 
+    Supponiamo di voler accendere e spegnere un led utilizzando una board Arduino. Quello che faremo allora è prendere il led, collegarlo ad una resistenza per limitarne la corrente e connettere l'altro terminale del led al pin digitale di Arduino.\footnote{Ricordando che il led possiede una polarità.}
 
+    Per poter funzionare, questo pin dovrà essere impostato all'interno del \lstinline[style=myArduino]{void setup()} come uscita digitale attraverso la funzione \lstinline[style=myArduino]{pinMode(pin, OUTPUT)}. Nel \lstinline[style=myArduino]{void loop()} inseriremo la funzione \lstinline[style=myArduino]{digitalWrite(pin, HIGH)} per accendere il led e \lstinline[style=myArduino]{digitalWrite(pin, LOW)} per spegnarlo. 
+
+    Se, però, mettessimo queste funzioni una dietro l'altra quello che accade è che il led rimarrà sempre acceso, e questo perché la velocità con Arduino esegue il programma è molto veloce e non ha il tempo di spegnere il led. Per questo, tra una funzione e l'altra inseriremo la funzione \lstinline[style=myArduino]{delay(tempo)} impostando un certo valore di tempo in millisecondi. 
 
     \paragraph{Ingresso digitale}
 
@@ -688,6 +692,19 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
 
     Quando abbiamo un sensore o un trasduttore che produce un segnale di tipo analogico, per poter leggere i valori dobbiamo collegarlo ad un pin analogico. 
 
+    I pin analogici di Arduino sono collegati ad un convertitore analogico digitale (ADC) che, appunto, converte i segnali analogici in segnali digitali. In particolare, il convertitore di Arduino è un ADC a 10 bit, ciò significa che converte segnali che vanno da 0V a 5V in valori da 0 a 1023.\footnote{Per calcolare il numero di combinazioni basta fare $2^{10} = 1024$} La risoluzione di questo ADC si calcola molto semplicemente come $R = \frac{5 V}{2^{10}} = \frac{5 V}{1024} = 4.88mV$, ovvero ogni bit dell'ADC corrisponderà ad un valore di $4.88mV$.
+
+    All'interno del \lstinline[style=myArduino]{void setup()} non sarà necessario inizializzare il pin che vogliamo utilizzare con \lstinline[style=myArduino]{pinMode(pin, INPUT)} perché di default gli ingressi analogici di Arduino sono impostati come pin di ingresso. Dentro il \lstinline[style=myArduino]{void loop()}, per leggere il segnale analogico, bisogna utilizzare la funzione \lstinline[style=myArduino]{analogRead(pin)} e salvare questi valori in una variabile.
+
+    \paragraph{Uscita analogica}
+
+    Riprendiamo l'esempio del led. Prima utilizzavamo il pin digitale per accendere e spegnere il led, cioè sfruttavamo la funzione \lstinline[style=myArduino]{digitalWrite(pin, valore)} per commutare da 0V a 5V il led.  
+
+    Se adesso volessimo modulare la luminosità del led allora dovremmo cambiare la tensione applicata al led. Solitamente nelle board di questo tipo è presente un componente che fa il lavoro opposto dell'ADC ovvero il convertitore digitale analogico (DCA) che converte un valore digitale in un valore analogico.
+
+    Arduino, però, non dispone di un DCA al suo interno. Per poter avere una tensione analogica in uscita viene sfruttata un'altra tecnica: il PWM.\\
+    Il PWM (Pulse Width Modulation) ovvero modulazione d'ampiezza di impulso, è una tecnica che permette di generare un segnale di onda quadra con un \textit{duty cycle}.  
+    
 
 \chapter{Sorgenti di Radiazione}
 Le sorgenti radioattive forniscono un mezzo conveniente per testare e calibrare i rivelatori e sono strumenti essenziali sia nel laboratorio di fisica nucleare che in quello delle alte energie. Una comprensione dei processi nucleari di base nelle sorgenti radioattive è quindi una necessità prima di iniziare a lavorare in laboratorio\footnote{Per una discussione più dettagliata rimandiamo il lettore a uno qualsiasi dei testi standard di fisica nucleare per maggiori informazioni.}.\\
