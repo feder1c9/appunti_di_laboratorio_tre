@@ -146,7 +146,7 @@ Quanto seguirà nelle prossime pagine sono gli appunti delle lezioni del corso d
 
 \chapter*{Programma del Corso}
 \begin{itemize}
-    \item[1] \textbf{Tecniche e strumenti di laboratorio}: Funzionamento e utilizzo di sensori per la misura di grandezze fisiche --- Sensori analogici e digitali --- Acquisizione dati da sensori --- Data logger --- Utilizzo di sistemi tradizionali e di microprocessori a basso costo --- Il sistema Arduino e sue applicazioni --- Multimetri digitali e oscilloscopi analogici e digitali --- Elementi base di tecnica del vuoto --- Attrezzature per la produzione del vuoto: principali tipi di pompe da vuoto --- Strumenti per la misura del vuoto --- Misura di radiazioni dall’infrarosso all’ultravioletto --- Fibre ottiche e trasporto della luce --- Spettrofotometri digitali --- Proprietà e utilizzo di sorgenti radioattive alfa, beta e gamma.
+    \item[1] \textbf{Tecniche e strumenti di laboratorio}: Funzionamento e utilizzo di sensori per la misura di grandezze fisiche --- Sensori analogici e digitali --- Acquisizione dati da sensori --- Data logger --- Utilizzo di sistemi tradizionali e di microprocessori a basso costo --- Il sistema Arduino e sue applicazioni --- Multimetri digitali e oscilloscopi analogici e digitali --- Elementi base di tecnica del vuoto --- Attrezzature per la produzione del vuoto: principali tipi di pompe da vuoto --- Strumenti per la misura del vuoto --- Misura di radiazioni dall’ infrarosso all’ ultravioletto --- Fibre ottiche e trasporto della luce --- Spettrofotometri digitali --- Proprietà e utilizzo di sorgenti radioattive alfa, beta e gamma.
     
     \item[2] \textbf{Rivelatori di radiazione}: Interazione di particelle cariche pesanti con la materia – Relazione di Bethe-Bloch – Range – Straggling – Perdita di energia di elettroni e positroni – Radiazione di frenamento - Radiazione Cherenkov - Interazione dei fotoni con la materia – Effetto fotoelettrico, effetto Compton e produzione di coppie – Sciami elettromagnetici – Sviluppo longitudinale e trasversale di uno sciame elettromagnetico – I rivelatori di particelle nella fisica moderna - Classificazione dei rivelatori di particelle – Misura dell’energia, dell’impulso, della posizione, della massa e della carica delle particelle subatomiche – Proprietà generali di un rivelatore: sensibilità, risoluzione, efficienza, tempo morto - Rivelatori a gas – Camere a ionizzazione – Contatori Geiger – Rivelatori a semiconduttore – Rivelatori a strip, a drift e a pixel di silicio – Il danneggiamento da radiazione – Rivelatori a scintillazione - Scintillatori organici e inorganici – Risposta in luce – Fotomoltiplicatori – Guide di luce e fibre WLS – Fotodiodi a valanga e silicon photomultiplier.
 
@@ -158,65 +158,14 @@ Quanto seguirà nelle prossime pagine sono gli appunti delle lezioni del corso d
 \newpage
 \mainmatter
 
-\chapter{Tecniche e strumenti di laboratorio}
-\section{Misura di grandezze fisiche mediante sensori}
-Il \textbf{sensore} è un trasduttore che si trova in diretta interazione con il sistema misurato. In ambito strettamente metrologico, il termine sensore è riferito solamente al componente che fisicamente effettua la trasformazione della grandezza d'ingresso in un segnale di altra natura. In base alla precedente descrizione un sensore può essere facilmente schematizzato come un blocco che riceve in ingresso la grandezza fisica non elettrica da misurare e fornisce in uscita la grandezza elettrica corrispondente:
-\begin{center}
-    \includegraphics[width=8cm]{sensore.png}
-\end{center}
-Lo scopo di tale conversione di segnale è quello di interfacciare il mondo esterno con un sistema elettronico. I dispositivi in commercio spesso integrano al loro interno anche alimentatori stabilizzati, amplificatori di segnali, dispositivi di comunicazione remota, ecc. In quest'ultimo casi si preferisce definirli \textbf{trasduttori}. Bisogna tuttavia osservare che questa distinzione viene raramente seguita: nella maggior parte dei casi i due termini, sensore e trasduttore, vengono usati praticamente come sinonimi. E così faremo nel seguito di questa trattazione.\\
-Un sensore viene detto \textbf{analogico} se la grandezza elettrica prodotta in uscita varia con continuità in risposta alla variazione della grandezza di ingresso. Viceversa un sensore viene detto \textbf{digitale} se i valori possibili in uscita sono limitati. Nel caso più semplice, quello dei cosiddetti \textit{sensori on-off}, i valori in uscita possono essere soltanto due.\\
-La distinzione fra i due tipi di sensori, analogici e digitali, è importante in quanto le tecniche di trattamento del segnale prodotto dal sensore sono notevolmente diverse nei due casi. In parole semplici, il segnale prodotto da un sensore digitale può essere trattato direttamente da un circuito digitale: per esempio un dispositivo logico, un contatore oppure una scheda di acquisizione per computer. Viceversa i segnali prodotti dai sensori analogici devono essere trattati da circuiti analogici (filtri, circuiti di condizionamento, amplificatori). In seguito essi potranno eventualmente essere convertiti digitalmente (con convertitori analogici-digitali) e quindi trattati ulteriormente con elettronica di tipo digitale.\\
-Oggigiorno esistono sensori in grado di misurare praticamente qualsiasi grandezza fisica. In base al tipo di grandezza misurata i sensori possono essere così classificati: meccanici, acustici, termici, magnetici, chimici,ecc... Vediamoli più nello specifico.
-\section{Esempi di sensori analogici}
-\begin{itemize}
-    \item Sensore di forza;
-    \item Sensore di pressione atmosferica;
-    \item Sensore di intensità luminosa;
-    \item Tanti altri: pH, carica elettrica, campo magnetico, accelerazione, umidità...
-\end{itemize}
-\section{Esempi di sensori digitali}
-\begin{itemize}
-    \item Sensore di posizione: in grado di rilevare la presenza di oggetti nelle immediate vicinanze. Il funzionamento è molto facile, il sensore emette un’onda di ultrasuoni ad una specifica frequenza verso l’eventuale target e aspetta il tempo necessario per l’eco di ritorno. Durante questo intervallo, misura la presenza e la distanza dell'ostacolo.
-    \item Sensore a foto-traguardo: è costituito da una fotocellula ed un LED. 
-    \item Sensore di moto rotatorio: è costituito da una puleggia ed un sistema digitale che converte l'angolo di rotazione in una grandezza misurabile.
-\end{itemize}
-Alcuni esempi di esperimenti con sensori:
-\begin{itemize}
-    \item Moto su un piano inclinato;
-    \item Misura della velocità del suono;
-    \item Studio dei battimenti;
-    \item Urti elastici e anelastici;
-    \item Oscillazioni non lineari e smorzate di un pendolo.
-\end{itemize}
-
-\section{Software di acquisizione dati}
-Il software di acquisizione deve consentire:
-\begin{itemize}
-    \item Scelta dei sensori da utilizzare;
-    \item Opzioni di campionamento e raccolta dati;
-    \item  Modalità di visualizzazione dei risultati;
-    \item Possibilità di salvare ed esportare i dati;
-    \item Eventuali analisi grafiche e/o numeriche.
-\end{itemize}
-Software originale fornito dalla PASCO: \textit{Science Workshop}
-\begin{itemize}
-    \item Distribuzione libera;
-    \item Utilizzabile sotto Windows (fino a XP).
-\end{itemize}
-Software più recenti della stessa Casa: Data Studio,...
-\begin{itemize}
-    \item Versioni utilizzabili anche con Windows 7, 10, Mac,...
-    \item Versione di prova o «Light»,...
-\end{itemize}
-
 
 \chapter{Sistemi di controllo}
 
-Nella vita di tutti i giorni, ognuno di noi compie delle azioni che gli permettono di interfacciarsi e dialogare con il mondo esterno: dallo svegliarsi e prepararsi un caffè, fino a guidare l'auto per andare al lavoro.
-Tutte queste azioni vedono noi come i protagonisti che gestiscono cosa fare e quando farlo a seconda delle condizioni che l'ambiente ci propone.
+Nella vita di tutti i giorni ognuno di noi compie delle azioni che gli permette di interfacciarsi e dialogare con il mondo esterno: dallo svegliarsi e prepararsi un caffè, fino a guidare l'auto per andare al lavoro.
 
-Portiamo alcuni esempi di azioni quotidiane. Consideriamo un automobilista che sta guidando e arriva davanti a un incrocio regolato da un semaforo. Supponiamo che quest'ultimo sia rosso: allora l'automobilista inizierà a frenare fino ad arrestarsi. Questo accade perché l'automobilista, guardando il colore rosso del semaforo, associa a questo colore il significato di arresto/stop, e quindi durante la marcia, inizierà a premere il pedale del freno fino a quando non si fermerà. Dopodiché, passato qualche secondo, il semaforo torna a essere verde. In tal caso, l'automobilista assocerà il colore verde al significato di via libera/partenza e quindi inizierà a premere il pedale dell'acceleratore per poter partire.\footnote{Ovviamente dopo aver inserito la marcia.} \\
+In tutte queste attività siamo noi i protagonisti: decidiamo quali azioni intraprendere e quali comportamenti adottare in risposta agli stimoli dell'ambiente.
+
+Portiamo alcuni esempi di azioni quotidiane. Consideriamo un automobilista che sta guidando e arriva davanti a un incrocio regolato da un semaforo. Supponiamo che quest'ultimo sia rosso: allora l'automobilista inizierà a frenare fino ad arrestarsi. Questo accade perché l'automobilista, guardando il colore rosso del semaforo, associa a questo colore il significato di arresto/stop, e quindi durante la marcia, inizierà a premere il pedale del freno fino a quando non si fermerà. Dopodiché, passato qualche secondo, il semaforo tornerà a essere verde. In tal caso, l'automobilista assocerà il colore verde al significato di via libera/partenza e quindi inizierà a premere il pedale dell'acceleratore per poter partire.\footnote{Ovviamente dopo aver inserito la marcia.} \\
 Immaginiamo ora un altro esempio. Supponiamo di star lavando i piatti: oltre prendere il sapone, apriremo l'acqua calda che si troverà ad una certa temperatura. Allora, per non scottarci gireremo il rubinetto verso l'acqua fredda. Continueremo quindi a muovere il rubinetto finché non troviamo la giusta temperatura dell'acqua per lavare i piatti e per non scottarci. 
 
 Questi esempi visti sono la visualizzazione di come un \textit{Sistema di Controllo} funziona.
@@ -310,7 +259,7 @@ Prima di passare alla descrizione di ogni sottosistema dobbiamo introdurre alcun
 
   \section{Sottosistema di Acquisizione Dati}
 
-  Un Sottosistema di Acquisizione ad un Solo Canale utilizza un solo sensore o trasduttore per ricevere informazioni dal mondo esterno. Nel caso in cui avessimo più di un sensore o trasduttore parleremmo di un Sottosistema di Acquisizione Multicanale.
+  Un \textit{Sottosistema di Acquisizione ad un solo canale} utilizza un solo sensore o trasduttore per ricevere informazioni dal mondo esterno. Nel caso in cui avessimo più di un sensore o trasduttore parleremmo di un \textit{Sottosistema di Acquisizione Multicanale}.
 
   Lo schema generale di un Sottosistema di Acquisizione ad un solo canale è il seguente:
 
@@ -331,19 +280,21 @@ Prima di passare alla descrizione di ogni sottosistema dobbiamo introdurre alcun
             \item ($I \rightarrow V$) Convertitore Corrente – Tensione: Se il sensore produce come segnale una corrente mentre il Sistema di Elaborazione vuole il segnale sotto forma di tensione allora è necessario un convertitore di questo tipo.
           \end{itemize}
           \textbf{\textit{Si usa tutte le volte in cui per un qualche motivo vogliamo convertire una grandezza in un’altra. Se necessario, è possibile utilizzarne più di uno.}}
-    \item \textbf{\textit{(A)} Amplificatore e \textit{(T)} Traslatore}\\
-      L’\textbf{Amplificatore} è un circuito in grado di amplificare, cioè moltiplicare per una costante l’ampiezza della grandezza elettrica presente al suo ingresso.
-      \textbf{\textit{Viene utilizzato per portare l’ampiezza del segnale al valore richiesto dal Sottosistema di Elaborazione Dati.}} 
+    \item \textbf{\textit{(A)} Amplificatore e \textit{(T)} Traslatore}
+          \begin{itemize}
+            \item L’\textbf{Amplificatore} è un circuito in grado di amplificare, cioè moltiplicare per una costante l’ampiezza della grandezza elettrica presente al suo ingresso.
+              \textbf{\textit{Viene utilizzato per portare l’ampiezza del segnale al valore richiesto dal Sottosistema di Elaborazione Dati.}} 
 
-      Il \textbf{Traslatore} è un circuito in grado di sommare un valore costante (positivo o negativo) al segnale spostando la forma d’onda verticalmente della quantità desiderata. \textbf{\textit{Viene in genere utilizzato per azzerare l’offset}}
+            \item Il \textbf{Traslatore} è un circuito in grado di sommare un valore costante (positivo o negativo) al segnale spostando la forma d’onda verticalmente della quantità desiderata. \textbf{\textit{Viene in genere utilizzato per azzerare l’offset}}
 
-      Mediante un Amplificatore Sommatore è possibile Traslare ed Amplificare il segnale con un unico circuito.
+              Mediante un Amplificatore Sommatore è possibile Traslare ed Amplificare il segnale con un unico circuito.
 
-      \begin{figure}[H]
-        \centering
-        \includegraphics[scale=0.6]{image/foto_sistemi_di_controllo/Amplificatore_traslatore.png}
-        \caption{Segnale traslato e amplificato}\label{fig:amplificatore_traslatore}
-      \end{figure}
+              \begin{figure}[H]
+                \centering
+                \includegraphics[scale=0.6]{image/foto_sistemi_di_controllo/Amplificatore_traslatore.png}
+                \caption{Segnale traslato e amplificato}\label{fig:amplificatore_traslatore}
+              \end{figure}
+          \end{itemize}
 
     \item \textbf{\textit{(F)} Filtro}: \\
           Il filtro è un circuito selettivo in frequenza, esso lascia passare inalterate alcune frequenze mentre ne blocca altre.
@@ -424,47 +375,135 @@ Prima di passare alla descrizione di ogni sottosistema dobbiamo introdurre alcun
 
   Queste definizioni sono molto importanti perché ci permettono di capire come funziona e come poter realizzare un sistema di controllo. In fisica, che sia teorica o sperimentale, ci sarà sempre bisogno di utilizzare un sistema di controllo, dai software di simulazione alla realizzazione di un circuito vero e proprio per l'acquisizione dei dati.
 
-    \section{Microprocessori e Microcontrollori}
-    % Differenza tra microprocessore (CPU di un PC) e microcontrollore (un intero computer su un singolo chip, ottimizzato per interagire con l'esterno).
+  \section{Microprocessori e Microcontrollori}
+  % Differenza tra microprocessore (CPU di un PC) e microcontrollore (un intero computer su un singolo chip, ottimizzato per interagire con l'esterno).
 
-    Le informazioni provenienti dal sottosistema di acquisizione dati devono essere elaborate, manipolate e trasformate da un sottosistema di elaborazione dati.
+  Le informazioni provenienti dal sottosistema di acquisizione dati devono essere elaborate, manipolate e trasformate da un sottosistema di elaborazione dati.
 
-    Nei dispositivi moderni questo è possibile grazie all'utilizzo di microprocessori e microcontrollori.  
+  Nei dispositivi moderni questo è possibile grazie all'utilizzo di microprocessori e microcontrollori.  
 
-        \section{Microprocessore}
+    \subsection{Microprocessore}
 
-        Un \textbf{\textit{microprocessore}}, e in generale un \textit{processore}, è un dispositivo hardware in grado di gestire dati sulla base di istruzioni che gli vengono fornite. La sua struttura varia moltissimo, andando da semplici elaboratori di segnale fino alla CPU \textit{(Central Processing Unit)} all'interno di un computer. 
+    Un \textbf{\textit{microprocessore}}, e in generale un \textit{processore}, è un dispositivo hardware in grado di gestire dati sulla base di istruzioni che gli vengono fornite. La sua struttura varia moltissimo, andando da semplici elaboratori di segnale fino alla CPU \textit{(Central Processing Unit)} all'interno di un computer. 
 
-        Di seguito la struttura di una CPU:
+    Di seguito la struttura di una CPU:
 
-        \begin{figure}[H]
-            \centering
-            \includegraphics[scale=0.57]{image/foto_sistemi_di_controllo/cpu_schema.jpg}
-            \caption{Schema di una CPU}\label{fig:cpu_schema}
-        \end{figure}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.57]{image/foto_sistemi_di_controllo/cpu_schema.jpg}
+      \caption{Schema di una CPU}\label{fig:cpu_schema}
+    \end{figure}
 
-        Tra i vari blocchi, i più importanti sono:
-        \begin{itemize}
-            \item \textbf{Unità di Controllo} (control unit o CU): è il cuore centrale di una CPU. Preleva istruzioni e dati dalla memoria centrale, decodifica le istruzioni e le invia ad un'unità aritmetico-logica per poi eseguirle. La Cu ha anche il compito di organizzare il lavoro delle altre unità di elaborazione.
-            \item \textbf{Unità aritmetico-logica} (Arithmetic Logic Unit o ALU): si occupa di eseguire le operazioni logiche ed aritmetiche. Si tratta della unità che svolge i calcoli.
-            \item \textbf{Clock}: anche se non riportato nell'immagine, il clock è quel segnale che scandisce e sincronizza tutte le operazioni che avvengono all'interno della CPU. Solitamente si tratta di un segnale logico (onda quadra) con frequenze elevatissime, dell'ordine dei GHz. Senza il clock perderemmo la sincronizzazione e ciò porterebbe a degli errori che possono essere di calcolo o di comunicazione tra i vari blocchi.
-            \item \textbf{Registri}: i registri sono delle memorie che hanno un tempo di accesso nettamente inferiore a quello della memoria centrale, cioè sono più veloci. Senza di essi, le varie operazioni che la CU deve eseguire sarebbero lentissime. In tal caso avere frequenze di clock così elevate sarebbe del tutto inutile perché la CU dovrebbe attendere il tempo necessario di accedere alla memoria centrale.
-        \end{itemize}
+    Tra i vari blocchi, i più importanti sono:
+    \begin{itemize}
+      \item \textbf{Unità di Controllo} (control unit o CU): è il cuore centrale di una CPU. Preleva istruzioni e dati dalla memoria centrale, decodifica le istruzioni e le invia ad un'unità aritmetico-logica per poi eseguirle. La Cu ha anche il compito di organizzare il lavoro delle altre unità di elaborazione.
+      \item \textbf{Unità aritmetico-logica} (Arithmetic Logic Unit o ALU): si occupa di eseguire le operazioni logiche ed aritmetiche. Si tratta della unità che svolge i calcoli.
+      \item \textbf{Clock}: anche se non riportato nell'immagine, il clock è quel segnale che scandisce e sincronizza tutte le operazioni che avvengono all'interno della CPU. Solitamente si tratta di un segnale logico (onda quadra) con frequenze elevatissime, dell'ordine dei GHz. Senza il clock perderemmo la sincronizzazione e ciò porterebbe a degli errori che possono essere di calcolo o di comunicazione tra i vari blocchi.
+      \item \textbf{Registri}: i registri sono delle memorie che hanno un tempo di accesso nettamente inferiore a quello della memoria centrale, cioè sono più veloci. Senza di essi, le varie operazioni che la CU deve eseguire sarebbero lentissime. In tal caso avere frequenze di clock così elevate sarebbe del tutto inutile perché la CU dovrebbe attendere il tempo necessario di accedere alla memoria centrale.
+    \end{itemize}
 
-        \section{Microcontrollore}
+    \subsection{Microcontrollore}
 
-        Un \textbf{\textit{microcontrollore}} (MicroController Unit o MCU), è un dispositivo integrato\footnote{Un circuito integrato (in inglese integrated circuit, abbreviato IC) è un circuito elettronico miniaturizzato dove i vari transistor sono stati formati tutti nello stesso istante grazie a un unico processo fisico-chimico.} su singolo circuito elettronico. Utilizza tecniche di microelettronica per ridurre in un piccolo pacchetto (o package) vari componenti quali CPU (Central Processing Unit), memoria e diversi pin di ingresso e uscita, attraverso i quali è possibile interagire con il mondo esterno.
+    Un \textbf{\textit{microcontrollore}} (MicroController Unit o MCU), è un dispositivo integrato\footnote{Un circuito integrato (in inglese integrated circuit, abbreviato IC) è un circuito elettronico miniaturizzato dove i vari transistor sono stati formati tutti nello stesso istante grazie a un unico processo fisico-chimico.} su singolo circuito elettronico. Utilizza tecniche di microelettronica per ridurre in un piccolo pacchetto (o package) vari componenti quali CPU (Central Processing Unit), memoria e diversi pin di ingresso e uscita, attraverso i quali è possibile interagire con il mondo esterno.
 
-        Nato come evoluzione alternativa al microprocessore è utilizzato generalmente in sistemi embedded ovvero per applicazioni specifiche di controllo digitale (special purpose) non riprogrammabili dall'utente per altri scopi, spesso con una piattaforma hardware dedicate.
+    Nato come evoluzione alternativa al microprocessore è utilizzato generalmente in sistemi embedded ovvero per applicazioni specifiche di controllo digitale (special purpose) non riprogrammabili dall'utente per altri scopi, spesso con una piattaforma hardware dedicate.
 
-        \begin{figure}[H]
-            \centering
-            \includegraphics[scale=0.25]{image/foto_sistemi_di_controllo/microcontrollore_schema.png}
-            \caption{Schema di un microcontrollore}\label{fig:microcontrollore_schema}
-        \end{figure}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[scale=0.25]{image/foto_sistemi_di_controllo/microcontrollore_schema.png}
+      \caption{Schema di un microcontrollore}\label{fig:microcontrollore_schema}
+    \end{figure}
 
-        Alcuni esempi di sistemi embedded in cui vengono usati i microcontrollori sono: controllo di hard disk e di stampanti, calcolatrici, sistemi di allarme, etc.\\
-        Si può pensare a un microcontrollore come un piccolo computer, in cui è possibile collegare sensori e attuatori per svolgere un determinato compito (task).
+    Alcuni esempi di sistemi embedded in cui vengono usati i microcontrollori sono: controllo di hard disk e di stampanti, calcolatrici, sistemi di allarme, etc.\\
+    Si può pensare a un microcontrollore come un piccolo computer, in cui è possibile collegare sensori e attuatori per svolgere un determinato compito (task).
+
+  \section{Sistema di acquisizione PASCO}
+
+  Il sistema PASCO è un apparato modulare commercializzato per applicazioni didattiche a partire dai primi anni 2000. Risulta necessario rispetto alle misurazioni tradizionali quando si devono analizzare grandezze fisiche che variano velocemente nel tempo, quando occorre un campionamento frequente o un numero elevato di misurazioni, e per permettere il salvataggio dei dati e l'analisi "on-line". Il sistema si compone di un'interfaccia, una serie di sensori (analogici e digitali), un software di acquisizione e una libreria di esperimenti.
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{image/foto_sistemi_di_controllo/pasco_generale.png}
+    \caption{Schema di acquisizione PASCO}\label{fig:pasco_generale}
+  \end{figure}
+
+  Le interfacce fungono da ponte tra i sensori e il computer:
+
+  \begin{itemize}
+      \item \textbf{Science Workshop 750}: Modello di fascia alta progettato per acquisizioni ad alta velocità e precisione. È dotata di 4 canali digitali e 3 canali analogici utilizzabili simultaneamente. Sfrutta una porta SCSI per raggiungere una frequenza di campionamento di 250 kHz, larghezza di banda che permette al sistema di operare come un oscilloscopio in tempo reale. Include un generatore di funzioni integrato e, per letture a bassa frequenza ($<$ 100 Hz), applica un \textit{over-sampling} 8x per minimizzare il rumore del segnale.
+      \item \textbf{Science Workshop 500}: Interfaccia versatile concepita per la portabilità e l'uso sul campo. Dispone di 2 canali digitali e 3 canali analogici. Utilizza una connessione tramite porta seriale (50 kHz), potendo raggiungere picchi di 20 kHz in \textit{burst mode} sui canali analogici. La sua natura portatile è garantita da un buffer interno da 50 KB e dall'alimentazione tramite batterie AA; la velocità di trasferimento dati verso il PC è stata successivamente ottimizzata tramite l'impiego di adattatori USB/Seriale dedicati.
+  \end{itemize}
+
+  \paragraph{La tecnologia SCSI}
+
+  Per comprendere le prestazioni dell'interfaccia Science Workshop 750, è fondamentale analizzare lo standard di connessione impiegato: la tecnologia \textbf{SCSI} (\textit{Small Computer System Interface}). Introdotta tra gli anni '80 e '90, la SCSI è una famiglia di standard per il trasferimento dati ad alta velocità progettata per collegare computer e periferiche in modo efficiente.
+
+  Sebbene l'avvento dello standard USB abbia semplificato il collegamento delle periferiche (\textit{Plug-and-Play}), la porta SCSI è stata per anni il punto di riferimento per l'acquisizione dati ad alte prestazioni in ambito scientifico, garantendo una stabilità di campionamento che le connessioni consumer del tempo non potevano offrire.
+
+  \section{Sensori e Trasduttori}
+  Il cuore del sistema PASCO è costituito dai sensori, ovvero trasduttori capaci di trasformare una grandezza fisica (posizione, forza, pressione, ecc.) in un segnale elettrico analogico o digitale.
+
+    \subsection{Sensori Analogici}
+    I sensori analogici producono un segnale in tensione o corrente che varia con continuità in relazione alla variazione della grandezza fisica esaminata. Tra i più utilizzati in laboratorio figurano:
+    \begin{itemize}
+        \item \textbf{Sensore di Forza}: Utilizzato per studiare l'interazione tra corpi o la tensione in sistemi statici e dinamici.
+        \item \textbf{Sensore di Campo Magnetico}: Permette di mappare l'intensità e la direzione del campo generato da magneti o correnti.
+        \item \textbf{Sensore di pH e Umidità}: Impiegati per misurazioni ambientali o elettrochimiche.
+        \item \textbf{Accelerometro}: Fondamentale per lo studio dei moti accelerati e delle forze d'inerzia.
+    \end{itemize}
+
+    \begin{figure}[H]
+      \centering
+      \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{image/foto_sistemi_di_controllo/sensori_1.png}
+      \end{minipage}\hfill
+      \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{image/foto_sistemi_di_controllo/sensori_2.png}
+      \end{minipage}
+      \caption{Sensori analogici della PASCO}\label{fig:sensori_analogici_pasco}
+    \end{figure}
+
+    \subsection{Sensori Digitali}
+    Questi sensori restituiscono valori discreti (tipicamente stati logici acceso/spento) o treni di impulsi.
+    \begin{itemize}
+        \item \textbf{Fototraguardo (Photogate)}: Composto da un emettitore e un ricevitore a infrarossi; rileva il tempo di oscuramento del fascio da parte di un oggetto in transito, permettendo di calcolare velocità medie e istantanee con alta precisione.
+        \item \textbf{Sensore di Posizione (Sonar)}: Funziona emettendo un treno di impulsi a ultrasuoni (frequenza tipica 120 Hz) e ricevendo l'eco riflesso dall'oggetto. Misurando il tempo di volo dell'impulso, il software calcola la distanza dell'oggetto in tempo reale, permettendo di ricostruire la legge oraria del moto.
+        \item \textbf{Sensore di Moto Rotatorio}: Codifica la rotazione di una puleggia in impulsi digitali, convertendoli in spostamento angolare.
+    \end{itemize}
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[height=4cm]{image/foto_sistemi_di_controllo/sensore_fototraguardo.png}
+      \hfill
+      \includegraphics[height=4cm]{image/foto_sistemi_di_controllo/sensore_posizione.png}
+      \hfill
+      \includegraphics[height=4cm]{image/foto_sistemi_di_controllo/sensore_moto_rotatorio.png}
+      \caption{Sensori digitali della PASCO}\label{fig:sensori_digitali_pasco}
+    \end{figure}
+
+  \section{Software di Acquisizione ed Elaborazione}
+  Il software funge da interfaccia utente per la configurazione dell'hardware e l'analisi dei dati raccolti.
+  \begin{itemize}
+      \item \textbf{Science Workshop}: Software storico che permette la gestione dei canali, la scelta della frequenza di campionamento e la visualizzazione tramite grafici, tabelle o strumenti a lancetta. È particolarmente utile per l'analisi spettrale tramite la Trasformata di Fourier (FFT).
+      \item \textbf{Data Studio}: Evoluzione moderna che offre una gestione più intuitiva dei sensori USB e strumenti di calcolo avanzati direttamente sui dati acquisiti (es. derivazione numerica per ottenere l'accelerazione dalla posizione).
+  \end{itemize}
+
+  \section{Esperienze di Laboratorio}
+  L'uso dei sensori permette di automatizzare la raccolta dati in esperimenti classici, riducendo l'errore umano e aumentando la densità di campionamento.
+
+  \begin{enumerate}
+      \item \textbf{Cinematica sul Piano Inclinato}: Attraverso il sensore di posizione si studia il moto uniformemente accelerato, ricavando direttamente le curve $x(t)$ e $a(t)$.
+      \item \textbf{Velocità del Suono}: Misurando il ritardo temporale tra l'emissione di un suono e il ritorno dell'eco (riflesso ad esempio da una pallina o dal fondo di un tubo), si calcola la velocità di propagazione dell'onda sonora in aria.
+      \item \textbf{Interferenza Sonora (Battimenti)}: Utilizzando due diapason a frequenze leggermente diverse e un sensore di suono, è possibile visualizzare l'inviluppo dell'onda risultante e misurare la frequenza del battimento.
+      \item \textbf{Dinamica degli Urti}: Studio della conservazione della quantità di moto e dell'energia cinetica durante urti elastici o anelastici tra carrelli o palline di diversa natura.
+      \item \textbf{Moto del Pendolo}: Analisi delle oscillazioni smorzate e verifica della dipendenza del periodo dall'ampiezza massima per grandi angoli (regime non lineare).
+  \end{enumerate}
+
+  [Image of the interference pattern created by two tuning forks of different frequencies]
+
+    
 
 \chapter{Arduino}
 
@@ -836,7 +875,7 @@ neutroni.
 \end{center}
 \begin{itemize}
     \item $1<Z<20$: i nuclei sono stabili quando il numero di protoni è uguale al numero di neutroni;
-    \item $Z>20$: i nuclei sono stabili quando il numero di neutroni è maggiore al numero di protoni, questo perchè il numero maggiore di neutroni serve a ridurre l'effetto repulsivo coulumbiano tra i protoni, se no si avrebbe la disintegrazione del nucleo dovuto all'allontanamento dei protoni.
+    \item $Z>20$: i nuclei sono stabili quando il numero di neutroni è maggiore al numero di protoni, questo perché il numero maggiore di neutroni serve a ridurre l'effetto repulsivo coulumbiano tra i protoni, se no si avrebbe la disintegrazione del nucleo dovuto all'allontanamento dei protoni.
     \item $Z=82$: è l'ultimo elemento con nucleo stabile; esso è il piombo-82;
     \item $Z>84$: i nuclei sono sempre instabili e radioattivi.
 \end{itemize}
@@ -1017,7 +1056,7 @@ La formula di Bethe-Bloch descrive la perdita di energia media per unità di per
 \end{equation*}
 La perdità di energia:
 \begin{itemize}
-    \item \'E proporzionale a $z^2$, ovvero alla carica della particella incidente (le particelle alfa perdono 4 volte più carica dei protoni), serve a identificare la partiecella;
+    \item \'E proporzionale a $z^2$, ovvero alla carica della particella incidente (le particelle alfa perdono 4 volte più carica dei protoni), serve a identificare la particella;
     \item \'E proporzionale al rapporto $\frac{Z}{A}$, si ha maggiore perdita di energia sui nuclei leggeri in quanto questo rapporto è maggiore.
     \item dipende dall'energia della particella incidente, e se $\beta=\frac{v}{c}$ con vi piccolo allora possiamo dire che $\frac{1}{\beta^2}\propto\frac{1}{E}$;
 \end{itemize}
@@ -1275,7 +1314,7 @@ Il coefficiente di assorbimento è dato da:
 $$\mu=N\sigma_{tot}=\frac{N_a\rho}{A}\sigma_{tot}$$
 dove $N$ è la densità di atomi nell'assorbitore e $\sigma_{tot}$ la sezione d'urto totale per atomo, dovuta al contributo dei 3 processi secondo la formula:
 $$\sigma_{tot}=\sigma_{phot}+Z\sigma_{Compton}+\sigma_{coppie}$$
-dove $Z$, numero atomico dell'assorbitore, moltiplica $\sigma_{Compton}$ in modo da considerare gli $Z$ elettroni per
+dove $Z$, numero atomico dell' assorbitore, moltiplica $\sigma_{Compton}$ in modo da considerare gli $Z$ elettroni per
 atomo.\\
 Nei grafici successivi vengono rappresentate le sezioni d’urto dei vari processi di interazione dei gamma in funzione dell’energia.
 \begin{center}
@@ -1754,7 +1793,7 @@ La ricombinazione può essere, quindi, essenzialmente di due tipologie:
     $$e^-+X^+\rightarrow X+h\nu$$
     $$e^-+X\rightarrow X^-+h\nu$$
 \end{itemize}
-Per essere rivelati, elettroni e ioni positivi devono sopravvivere per un tempo almeno pari al tempo di raccolta degli elettroni, in altre parole, affinchè le particelle vengano rivelate il tempo di risposta dello strumento deve essere minore del tempo di ricombinazione. Per tale ragione spesso la scelta del gas verte su quelli costituiti da molecole non molto elettronegative.\\
+Per essere rivelati, elettroni e ioni positivi devono sopravvivere per un tempo almeno pari al tempo di raccolta degli elettroni, in altre parole, affinché le particelle vengano rivelate il tempo di risposta dello strumento deve essere minore del tempo di ricombinazione. Per tale ragione spesso la scelta del gas verte su quelli costituiti da molecole non molto elettronegative.\\
 Alcuni gas elettronegativi hanno tempi di attaccamento molto brevi, ad esempio per $O_2$ è di $140 ns$.
 
 \section{Migrazione}
