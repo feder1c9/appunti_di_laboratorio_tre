@@ -431,7 +431,7 @@ Prima di passare alla descrizione di ogni sottosistema dobbiamo introdurre alcun
 
   \begin{itemize}
       \item \textbf{Science Workshop 750}: Modello di fascia alta progettato per acquisizioni ad alta velocità e precisione. È dotata di 4 canali digitali e 3 canali analogici utilizzabili simultaneamente. Sfrutta una porta SCSI per raggiungere una frequenza di campionamento di 250 kHz, larghezza di banda che permette al sistema di operare come un oscilloscopio in tempo reale. Include un generatore di funzioni integrato e, per letture a bassa frequenza ($<$ 100 Hz), applica un \textit{over-sampling} 8x per minimizzare il rumore del segnale.
-      \item \textbf{Science Workshop 500}: Interfaccia versatile concepita per la portabilità e l'uso sul campo. Dispone di 2 canali digitali e 3 canali analogici. Utilizza una connessione tramite porta seriale (50 kHz), potendo raggiungere picchi di 20 kHz in \textit{burst mode} sui canali analogici. La sua natura portatile è garantita da un buffer interno da 50 KB e dall'alimentazione tramite batterie AA; la velocità di trasferimento dati verso il PC è stata successivamente ottimizzata tramite l'impiego di adattatori USB/Seriale dedicati.
+      \item \textbf{Science Workshop 500}: Interfaccia versatile concepita per la portabilità e l'uso sul campo. Dispone di 2 canali digitali e 3 canali analogici. 
   \end{itemize}
 
   \paragraph{La tecnologia SCSI}
@@ -525,6 +525,16 @@ Prima di passare alla descrizione di ogni sottosistema dobbiamo introdurre alcun
 
 \chapter{Arduino}
 
+L'elettronica è da sempre un ambito di forte interesse, tanto che per decenni è stata un hobby popolarissimo diffuso attraverso numerose riviste specializzate, sia americane che italiane, le quali guidavano gli appassionati nella realizzazione pratica di circuiti. Nel corso degli anni, le tecnologie di base hanno subìto un'evoluzione profonda: si è passati dall'impiego dei tubi a vuoto (negli anni '30 e '40), ai transistor (negli anni '60), per arrivare poi alla grande rivoluzione dei circuiti integrati logici e analogici negli anni '70. 
+
+Storicamente, l'interconnessione di questi circuiti integrati permetteva la progettazione di sistemi specializzati e la costruzione di progetti anche molto complessi, come i ricevitori radio. Esisteva tuttavia un grosso ostacolo: le funzioni che un circuito poteva eseguire erano determinate in modo fisso e permanente dalle connessioni fisiche (hardware) tra i componenti, e non potevano in alcun modo essere riprogrammate o modificate via software. 
+
+La vera svolta concettuale verso l'elaborazione programmabile si è avuta a cavallo tra gli anni '60 e '70 con la nascita dei microprocessori, come l'Intel 4004 rilasciato nel 1971. Questi dispositivi permisero a un circuito di modificare le proprie funzioni a seconda del software eseguito e costituirono il cuore dei primissimi personal computer commercializzati negli anni '70 e '80, tra cui l'Altair 8800, l'Apple II e il Commodore VIC 20.
+
+Se oggi abbiamo a disposizione personal computer estremamente potenti, farli interagire con il mondo esterno (ad esempio per controllare motori o leggere grandezze ambientali tramite sensori) risulta spesso molto complesso per un utente non specializzato. Di fatto, l'interazione dei computer moderni con l'hardware esterno è limitata quasi esclusivamente alla porta USB. 
+
+Arduino nasce esattamente come soluzione a questo problema: colmare il divario tra i dispositivi di calcolo e il mondo reale. Fornisce un sistema accessibile per interfacciare in modo semplice un microprocessore con l'ambiente esterno, unendo la flessibilità della programmazione software all'elettronica hardware.
+
 Arduino è un sistema di sviluppo hardware e software che permette la creazione di sistemi di controllo utilizzando delle schede elettroniche dotate di microcontrollore su circuito stampato.
 
 \begin{figure}[H]
@@ -539,7 +549,7 @@ Le schede elettroniche, chiamate board, sono formate da varie parti e componenti
     
 Esistono varie tipologie di schede, ognuna con un nome differente. Ad esempio, possiamo nominare le board Arduino Uno \cref{fig:logo_arduino}, Arduino Mini, Arduino Nano, Arduino Leonardo, etc., ognuna delle quali viene scelta a seconda dell'utilizzo che si intende effettuare. Infatti, ogni board presenta un numero differente di pin di I/O, una diversa alimentazione e anche componenti che permettono di utilizzare protocolli di comunicazione più complessi come ad esempio il WiFi o il Bluetooth.
 
-Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utilizzato in migliaia di progetti e applicazioni diverse. Il software Arduino è facile da usare per i principianti, ma al contempo sufficientemente flessibile per gli utenti più esperti. Funziona su Mac, Windows e Linux. Insegnanti e studenti lo utilizzano per costruire strumenti scientifici a basso costo, per dimostrare principi di chimica e fisica o per avvicinarsi alla programmazione e alla robotica. Designer e architetti realizzano prototipi interattivi, musicisti e artisti lo usano per installazioni e per sperimentare nuovi strumenti musicali. 
+Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utilizzato in migliaia di progetti e applicazioni diverse. Il software Arduino è facile da usare per i principianti, ma al contempo sufficientemente flessibile per gli utenti più esperti. Funziona su Mac, Windows e Linux. Insegnanti e studenti lo utilizzano per costruire strumenti scientifici a basso costo, per dimostrare principi di chimica e fisica o per avvicinarsi alla programmazione e alla robotica. Designer e architetti realizzano prototipi interattivi, musicisti e artisti lo usano per installazioni e per sperimentare nuovi strumenti musicali.
 
   \section{Interfaccia software di Arduino}
 
