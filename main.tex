@@ -535,7 +535,7 @@ Se oggi abbiamo a disposizione personal computer estremamente potenti, farli int
 
 Arduino nasce esattamente come soluzione a questo problema: colmare il divario tra i dispositivi di calcolo e il mondo reale. Fornisce un sistema accessibile per interfacciare in modo semplice un microprocessore con l'ambiente esterno, unendo la flessibilità della programmazione software all'elettronica hardware.
 
-Arduino è un sistema di sviluppo hardware e software che permette la creazione di sistemi di controllo utilizzando delle schede elettroniche dotate di microcontrollore su circuito stampato.
+Di base, Arduino è un sistema di sviluppo hardware e software che permette la creazione di sistemi di controllo utilizzando delle schede elettroniche dotate di microcontrollore su circuito stampato.
 
 \begin{figure}[H]
   \centering
@@ -591,6 +591,26 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
 
     Il linguaggio di programmazione usato in Arduino si basa su C/C++ ed è integrato da un framework chiamato Wiring, progettato per semplificare la creazione di prototipi elettronici con funzioni per gestire in maniera semplice le interfacce di input/output della scheda.
     
+    Prima di analizzare la struttura, è bene ricordare alcune regole sintattiche e concetti base:
+    \begin{itemize}[leftmargin=1.2cm, itemsep=1pt, topsep=5pt]
+      \item Ogni istruzione deve terminare con il punto e virgola (\texttt{;}).
+      \item Il codice è \textit{case sensitive} (distingue maiuscole da minuscole).
+      \item I commenti si inseriscono con \texttt{//} (singola riga) o racchiusi tra \texttt{/*} e \texttt{*/} (più righe).
+    \end{itemize}
+
+    Le variabili devono essere dichiarate specificandone il tipo prima del loro utilizzo. I principali tipi di dato (\textit{datatypes}) sono:
+    \begin{itemize}[leftmargin=1.2cm, itemsep=1pt, topsep=5pt]
+      \item \texttt{byte}: 8 bit (valori da 0 a 255).
+      \item \texttt{int}: 16 bit con segno (valori interi da -32.768 a 32.767).
+      \item \texttt{long}: 32 bit con segno, per numeri interi molto grandi.
+      \item \texttt{float}: 32 bit per numeri con la virgola (decimali).
+      \item \texttt{boolean}: assume solo i valori \texttt{true} (vero) o \texttt{false} (falso).
+      \item \texttt{String}: per memorizzare sequenze di caratteri e testo.
+    \end{itemize}
+
+    Per combinare variabili ed eseguire controlli logici, si utilizzano gli operatori matematici (\texttt{+}, \texttt{-}, \texttt{*}, \texttt{/}), le funzioni matematiche avanzate (\texttt{sqrt}, \texttt{abs}, \texttt{pow}, \texttt{sin}, \texttt{cos}), gli operatori di confronto (\texttt{>}, \texttt{<}, \texttt{==}, \texttt{!=}) e gli operatori logici (\texttt{\&\&} per AND, \texttt{||} per OR, \texttt{!} per NOT). 
+    Inoltre, per controllare il flusso logico del programma a seconda delle condizioni, si usano costrutti di controllo specifici come \texttt{if}, \texttt{if...else}, e iterazioni con i cicli \texttt{for} e \texttt{do...while}.
+
     I programmi sono scritti al PC utilizzando il software Arduino vengono trasmessi mediante la porta seriale USB al microcontrollore ATmega 328P e memorizzati nella memoria EEPROM\footnote{La EEPROM (Electrically Erasable Programmable Read-Only Memory) è un tipo di memoria non volatile, cancellabile e riprogrammabile elettricamente, utilizzata in elettronica per memorizzare piccole quantità di dati che devono persistere anche senza alimentazione. È molto comune nei microcontrollori e centraline auto} del microcontrollore ATmega 328P. Il programma viene eseguito successivamente in modo ciclico. Il codice sorgente di un programma per Arduino si chiama sketch. La struttura di base di un programma (sketch) scritto per la scheda Arduino è molto semplice e può essere suddiviso in tre parti:
 
     \begin{itemize}[leftmargin=1.2cm, itemsep=1pt, topsep=5pt]
@@ -610,6 +630,8 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
       \item \lstinline[style=myArduino]{analogRead(pin)}: serve a leggere i valori dell'ingresso analogico. I valori vanno da 0 a 1023 dove anche qua 0 corrisponde a 0 V e 1023 a 5V. Vedremo dopo perché l'ingresso analogico dà questi valori;
       \item \lstinline[style=myArduino]{analogWrite(pin, valore)}: permette di dare una tensione variabile da 0 a 5V al pin di uscita variando il parametro "valore" che va da 0 a 255. Questo è possibile grazie al PWM che approfondiremo in seguito;
       \item \lstinline[style=myArduino]{delay(tempo)}: mette in pausa per un certo tempo la scheda. Quindi, se ad esempio usiamo \lstinline[style=myArduino]{delay(1000)}, l'Arduino rimarrà in attesa per un tempo pari a 1000ms cioè 1 secondo. Durante questo intervallo la scheda riamane "bloccata", nel senso che non leggerà nessun valore di ingresso e non modificherà lo stato dei pin di output. Il microcontrollore sarà occupato semplicemente a contare il tempo che scorre. 
+      \item \lstinline[style=myArduino]{delayMicroseconds(us)}: ha un comportamento analogo a \texttt{delay}, ma blocca il microcontrollore per un intervallo di tempo specificato in microsecondi.
+      \item \lstinline[style=myArduino]{millis()}: restituisce il numero di millisecondi trascorsi dall'inizio dell'esecuzione del programma. A differenza di \texttt{delay}, non blocca la scheda e permette di eseguire azioni parallele tenendo traccia del tempo. Essendo gestito da un registro interno a 32 bit, raggiunge la sua capienza massima e torna a zero (\textit{overflow}) dopo circa 49,7 giorni.
     \end{itemize}
 
 
@@ -755,7 +777,7 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
 
     All'interno del \lstinline[style=myArduino]{void setup()} non sarà necessario inizializzare il pin che vogliamo utilizzare con \lstinline[style=myArduino]{pinMode(pin, INPUT)} perché di default gli ingressi analogici di Arduino sono impostati come pin di ingresso. Dentro il \lstinline[style=myArduino]{void loop()}, per leggere il segnale analogico, bisogna utilizzare la funzione \lstinline[style=myArduino]{analogRead(pin)} e salvare questi valori in una variabile. Di seguito un esempio.
 
-    \begin{lstlisting}[style=myArduino, basicstyle=\ttfamily\footnotesize, caption={Esempio pulsante}, captionpos=b, label=code:pulsante]
+    \begin{lstlisting}[style=myArduino, basicstyle=\ttfamily\footnotesize, caption={Esempio comunicazione seriale}, captionpos=b, label=code:comunicazione_seriale]
     const int analogPin = A0; 
 
     void setup() {
@@ -775,6 +797,8 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
       delay(100);
     }
     \end{lstlisting}
+
+    Un'applicazione classica è la misurazione dell'intensità luminosa tramite una \textbf{fotoresistenza}. Poiché questo componente varia la propria resistenza in base alla luce, non può essere collegato direttamente al pin analogico per fornire una tensione. Va invece inserito in un partitore di tensione, mettendolo in serie con una resistenza fissa (es. 10 $k\Omega$). La caduta di tensione misurata nel punto di giunzione tra i due componenti varierà tra 0 V e 5 V proporzionalmente alla luce ricevuta, permettendone la corretta lettura con \lstinline[style=myArduino]{analogRead()}.
 
     \paragraph{Uscita analogica}
 
@@ -875,6 +899,87 @@ Grazie alla sua interfaccia utente semplice e intuitiva, Arduino è stato utiliz
       \item \lstinline[style=myArduino]{Serial.println(valore)}: Il suffisso "ln" sta per line. Invia il dato e poi aggiunge i comandi invisibili di "ritorno a capo". L'istruzione di stampa successiva ripartirà dalla riga sottostante.
     \end{itemize}
 
+  \section{Applicazioni Pratiche e Sensori Avanzati}
+  
+  Oltre al semplice controllo di LED e pulsanti, le potenzialità di Arduino si estendono verso l'interfacciamento con il mondo fisico attraverso moduli più sofisticati.
+
+  \paragraph{Generazione di suoni}
+  Per la generazione di segnali acustici, è possibile collegare un \textit{buzzer passivo} a un pin digitale. A differenza di un buzzer attivo (che suona non appena riceve 5 V), un buzzer passivo necessita di un'onda quadra modulata per vibrare. Utilizzando la funzione \lstinline[style=myArduino]{tone(pin, frequenza)} si genera l'onda desiderata, mentre con \lstinline[style=myArduino]{noTone(pin)} se ne interrompe l'esecuzione. Mappando all'interno di un \textit{array} le frequenze corrispondenti alle note musicali (es. Do=131 Hz, Re=147 Hz) e utilizzando un ciclo \texttt{for}, è possibile programmare sequenze ritmiche e riprodurre melodie intere.
+
+  \paragraph{Acquisizione di segnali impulsivi (Contatore Geiger)}
+  Le letture sui pin digitali avvengono in modo estremamente rapido, impiegando mediamente solo circa 10 $\mu s$ per campionamento. Questa velocità consente di interfacciarsi con strumenti di precisione come i rivelatori di radiazioni. Ad esempio, collegando l'uscita TTL di un \textbf{contatore Geiger} a un pin digitale, ogni rilevazione di particella si tradurrà in un brevissimo impulso da 5 V. Utilizzando la funzione \lstinline[style=myArduino]{millis()} all'interno di un blocco \lstinline[style=myArduino]{if} che riconosce il passaggio di stato (da LOW a HIGH), il sistema non solo conterà il numero di eventi cumulativi, ma potrà calcolare istante per istante la distanza temporale ($\Delta t$) intercorsa tra un decadimento e l'altro.
+
+  \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.5]{image/foto_arduino/buzzer.jpg} \ \includegraphics[scale=0.15]{image/foto_arduino/geiger.jpg}
+        \caption{Buzzer e Geiger}\label{fig:buzzer_geiger}
+  \end{figure}
+
+  \section{Librerie ed Espansioni Hardware}
+
+  Quando un progetto cresce in complessità, non è sufficiente gestire manualmente le oscillazioni dei singoli pin, ma si ricorre a librerie software ed espansioni fisiche.
+
+  \paragraph{Le Librerie e i Display}
+  Una libreria è una collezione di istruzioni e funzioni pre-compilate progettata per semplificare drasticamente la comunicazione con specifici moduli elettronici. Per includere una libreria si utilizza la direttiva \lstinline[style=myArduino]{#include <nome_libreria.h>} all'inizio dello \textit{sketch}.
+  Questa procedura è obbligatoria, ad esempio, per pilotare output visivi complessi:
+  \begin{itemize}[leftmargin=1.2cm, itemsep=1pt, topsep=5pt]
+      \item \textbf{Display LCD}: come il classico modulo a 2 righe e 16 caratteri alfanumerici.
+      \item \textbf{Matrici LED}: moduli 8x8 o 32x16, utili per visualizzare testo scorrevole o animazioni bidimensionali.
+  \end{itemize}
+
+  \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.27]{image/foto_arduino/display_lcd.jpg} \ \includegraphics[scale=0.3]{image/foto_arduino/display_matrice.jpg}
+        \caption{Display LCD e a Matrice di LED}\label{fig:displays}
+  \end{figure}
+
+  \paragraph{Gli Shield}
+  Dal punto di vista hardware, Arduino può essere potenziato impiegando i cosiddetti \textit{Shield}. Si tratta di circuiti stampati modulari progettati per essere impilati direttamente sopra la scheda principale, agganciandosi alla medesima piedinatura.
+  Il mercato offre shield per qualsiasi applicazione: moduli Wi-Fi ed Ethernet per connettere la scheda a internet, shield per il controllo di potenza dei motori (\textit{Motor driver}), moduli GPS e lettori per schede SD. L'assemblaggio combinato di sensori e shield di connettività rappresenta la base per progetti di domotica (la casa intelligente) e robotica automatizzata.
+
+  \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.28]{image/foto_arduino/shield_wifi.jpg} \ \includegraphics[scale=0.5]{image/foto_arduino/shield_sd.jpg}
+        \caption{Shield wifi e SD}\label{fig:shield_wifi_sd}
+  \end{figure}
+
+  \section{Simulazione di Circuiti Elettronici}
+
+  L'analisi e la progettazione di un circuito elettronico reale sono attività che, storicamente, potevano risultare lente e costose, soprattutto a causa del rischio intrinseco di danneggiare i componenti durante le fasi di collaudo su \textit{breadboard}. Oggi, con la progressiva miniaturizzazione dei transistor (come descritto empiricamente dalla \textit{Legge di Moore}), i progettisti evitano la prototipazione fisica immediata preferendo affidarsi alla \textbf{simulazione circuitale}.
+
+  I simulatori odierni si basano su complessi modelli numerici (es. SPICE) capaci di emulare con alta fedeltà il comportamento fisico dei componenti. Questa pratica garantisce numerosi vantaggi:
+  \begin{itemize}[leftmargin=1.2cm, itemsep=1pt, topsep=5pt]
+      \item Permette l'analisi di circuiti senza disporre fisicamente dell'hardware.
+      \item Previene rotture e cortocircuiti accidentali.
+      \item Abbassa radicalmente i costi di sviluppo e il tempo di rilascio sul mercato (\textit{time-to-market}).
+  \end{itemize}
+  Sebbene una simulazione non possa sostituire al 100\% i test di laboratorio (poiché è impossibile modellare ogni singola variabile o interferenza del mondo reale), rappresenta uno strumento fondamentale in ingegneria.
+
+  Nel contesto di Arduino, esistono numerosi ambienti di sviluppo, molti dei quali basati su infrastruttura Cloud e totalmente gratuiti:
+  \begin{itemize}[leftmargin=1.2cm, itemsep=1pt, topsep=5pt]
+      \item \textbf{Tinkercad}: È una delle piattaforme educative più complete (prodotta da Autodesk). Offre un'interfaccia interattiva che permette di assemblare la propria breadboard con LED, resistenze e sensori (come fotoresistenze o buzzer), scrivere il codice e avviare la simulazione, osservando l'esecuzione del programma e i messaggi del Serial Monitor in tempo reale.
+      \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.3]{image/foto_arduino/tinkercad.png}
+        \caption{Tinkercad}\label{fig:tinkercad}
+      \end{figure}
+
+      \item \textbf{Fritzing}: Ideale per disegnare in maniera chiara la topologia dei collegamenti prima di cablarli realmente, per poi esportarli come schemi elettrici o progetti per circuiti stampati (PCB).
+      \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{image/foto_arduino/fritzing.jpg}
+        \caption{Fritzing}\label{fig:fritzing}
+      \end{figure}
+
+      \item \textbf{LTSpice e PSpice}: Software di simulazione professionale impiegati quando è richiesta l'analisi matematica rigorosa delle correnti e delle tensioni ai nodi del circuito. 
+      \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{image/foto_arduino/ltspice.jpg}
+        \caption{LTSpice}\label{fig:ltspice}
+      \end{figure}
+  \end{itemize}
+
+
 
 
 \chapter{Sorgenti di Radiazione}
@@ -899,7 +1004,7 @@ L'instabilità dell'atomo è una causa della radioattività o decadimento radioa
 I nuclei stabili si trovano soltanto lungo una stretta fascia del piano Z-N (nota anche come carta deinuclidi o di Segrè), tutti gli altri nuclei sono instabili. Nel grafico di seguito è riportato nell'asse delle ascisse i valori di $Z$, dove Z è il numero di protoni, e nell'asse delle ordinate  $N=A-Z$, dove $A$ è il numero di massa e $N$ il numero di
 neutroni.
 \begin{center}
-    \includegraphics[width=8cm]{nuclei_stabili.png}
+    \includegraphics[width=6.5cm]{nuclei_stabili.png}
 \end{center}
 \begin{itemize}
     \item $1<Z<20$: i nuclei sono stabili quando il numero di protoni è uguale al numero di neutroni;
